@@ -9,6 +9,9 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from sucsessful_wndw import Ui_Sucsessful_windw
+from error_wndw import Ui_Error_windw
+from FUNCTION import add_new_client
 
 
 class Ui_Add_client(object):
@@ -59,9 +62,58 @@ class Ui_Add_client(object):
         self.age_client.setText(_translate("Add_client", "Укажите дату рождения клиента:"))
         self.Phone_number_client.setText(_translate("Add_client", "Укажите номер телефона:"))
 
+        self.pushButton.clicked.connect(self.add_client)
+
+    def check_phone_num(self):
+        if self.lineEdit_phone_num_client.text() != '':
+            if self.lineEdit_phone_num_client.text() != '375':
+                if self.lineEdit_phone_num_client.text().isdigit():
+                    if len(self.lineEdit_phone_num_client.text()) == 12:
+                        return True
+                    else:
+                        self.label_error_phone_num_client.setText('Мало цифр для номера!')
+                        return False
+                else:
+                    self.label_error_phone_num_client.setText('Только цифры!!!')
+                    return False
+            else:
+                self.label_error_phone_num_client.setText('Вы ничего не ввели!')
+                return False
+        else:
+            self.label_error_phone_num_client.setText('Поле пустое!!!')
+            return False
+
+    def add_client(self):
+        name = any(x.isdigit() for x in self.lineEdit_name_client.text())
+        if name == False:
+            if self.check_phone_num() == True:
+                self.lineEdit_name_client.setReadOnly(True)
+                self.lineEdit_phone_num_client.setReadOnly(True)
+                self.dateEdit.setReadOnly(True)
+                result = (
+                self.lineEdit_phone_num_client.text(), self.dateEdit.text(), self.lineEdit_phone_num_client.text())
+                print(result)
+                add_new_client(result)
+                answer = True
+                if answer == True:
+                    sucsess = QtWidgets.QDialog()
+                    ui2 = Ui_Sucsessful_windw()
+                    ui2.setupUi(sucsess)
+                    sucsess.show()
+                    sucsess.exec_()
+                else:
+                    error = QtWidgets.QDialog()
+                    ui2 = Ui_Error_windw()
+                    ui2.setupUi(error)
+                    error.show()
+                    error.exec_()
+        else:
+            self.label_error_name_client.setText('В имени не бывает цифр!')
+
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     Add_client = QtWidgets.QDialog()
     ui = Ui_Add_client()
