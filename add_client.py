@@ -9,6 +9,8 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from sucsessful_wndw import Ui_Sucsessful_windw
+from error_wndw import Ui_Error_windw
 from FUNCTION import add_new_client
 
 class Ui_Add_client(object):
@@ -65,6 +67,8 @@ class Ui_Add_client(object):
 
         self.pushButton.clicked.connect(self.add_client)
 
+
+
     def check_phone_num(self):
         if self.lineEdit_phone_num_client.text() != '':
             if self.lineEdit_phone_num_client.text() != '375':
@@ -112,11 +116,23 @@ class Ui_Add_client(object):
                         self.lineEdit_name_client.text(), self.lineEdit_age_client.text(),
                         self.lineEdit_phone_num_client.text())
                     print(result)
-                    answer = add_new_client(result)
+                    # add_new_client(result)
+                    answer = False
                     if answer == True:
-                        pass
+                        sucsess = QtWidgets.QDialog()
+                        ui2 = Ui_Sucsessful_windw()
+                        ui2.setupUi(sucsess)
+                        sucsess.show()
+                        sucsess.exec_()
+                    else:
+                        error = QtWidgets.QDialog()
+                        ui2 = Ui_Error_windw()
+                        ui2.setupUi(error)
+                        error.show()
+                        error.exec_()
         else:
             self.label_error_name_client.setText('В имени не бывает цифр!')
+
 
 
 if __name__ == "__main__":

@@ -40,6 +40,11 @@ class Ui_Sucsessful_windw(object):
         self.label.setText(_translate("Sucsessful_windw", "Все прошло успешно!!!"))
         self.pushButton_sucsessful.setText(_translate("Sucsessful_windw", "ОК"))
 
+        self.pushButton_sucsessful.clicked.connect(self.close)
+
+    def close(self):
+        Sucsessful_windw.close()
+
 
 if __name__ == "__main__":
     import sys
