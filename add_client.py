@@ -59,13 +59,65 @@ class Ui_Add_client(object):
         Add_client.setWindowTitle(_translate("Add_client", "Add_client"))
         self.pushButton.setText(_translate("Add_client", "Подтвердить"))
         self.lineEdit_phone_num_client.setText(_translate("Add_client", "375"))
-        self.label_name_client.setText(_translate("Add_client", "Введите имя нового клиента:"))
+        self.label_name_client.setText(_translate("Add_client", "Введите ФИО нового клиента:"))
         self.age_client.setText(_translate("Add_client", "Укажите возраст:"))
         self.Phone_number_client.setText(_translate("Add_client", "Укажите номер телефона:"))
+
+        self.pushButton.clicked.connect(self.add_client)
+
+    def check_phone_num(self):
+        if self.lineEdit_phone_num_client.text() != '':
+            if self.lineEdit_phone_num_client.text() != '375':
+                if self.lineEdit_phone_num_client.text().isdigit():
+                    if len(self.lineEdit_phone_num_client.text()) == 12:
+                        print(len(self.lineEdit_phone_num_client.text()))
+                        return True
+                    else:
+                        self.label_error_phone_num_client.setText('Мало цифр для номера!')
+                        return False
+                else:
+                    self.label_error_phone_num_client.setText('Только цифры!!!')
+                    return False
+            else:
+                self.label_error_phone_num_client.setText('Вы ничего не ввели!')
+                return False
+        else:
+            self.label_error_phone_num_client.setText('Поле пустое!!!')
+            return False
+
+
+    def check_age(self):
+        if self.lineEdit_age_client.text() != '':
+            if self.lineEdit_age_client.text().isdigit():
+                if len(self.lineEdit_age_client.text()) >=3:
+                    self.label_error_age_client.setText('Больше 100-а лет?')
+                    return False
+                else:
+                    return True
+            else:
+                self.label_error_age_client.setText('Возраст указать цифрами!')
+                return False
+        else:
+            self.label_error_age_client.setText('Поле пустое!!!')
+            return False
+
+    def add_client(self):
+        name = any(x.isdigit() for x in self.lineEdit_name_client.text())
+        if name == False:
+            if self.check_phone_num() == True:
+                if self.check_age() == True:
+
+                    result = (
+                        self.lineEdit_name_client.text(), self.lineEdit_age_client.text(),
+                        self.lineEdit_phone_num_client.text())
+                    print(result)
+        else:
+            self.label_error_name_client.setText('В имени не бывает цифр!')
 
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     Add_client = QtWidgets.QDialog()
     ui = Ui_Add_client()
