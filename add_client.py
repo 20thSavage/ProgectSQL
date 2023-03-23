@@ -9,7 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+from FUNCTION import add_new_client
 
 class Ui_Add_client(object):
     def setupUi(self, Add_client):
@@ -70,7 +70,6 @@ class Ui_Add_client(object):
             if self.lineEdit_phone_num_client.text() != '375':
                 if self.lineEdit_phone_num_client.text().isdigit():
                     if len(self.lineEdit_phone_num_client.text()) == 12:
-                        print(len(self.lineEdit_phone_num_client.text()))
                         return True
                     else:
                         self.label_error_phone_num_client.setText('Мало цифр для номера!')
@@ -106,11 +105,16 @@ class Ui_Add_client(object):
         if name == False:
             if self.check_phone_num() == True:
                 if self.check_age() == True:
-
+                    self.lineEdit_name_client.setReadOnly(True)
+                    self.lineEdit_age_client.setReadOnly(True)
+                    self.lineEdit_phone_num_client.setReadOnly(True)
                     result = (
                         self.lineEdit_name_client.text(), self.lineEdit_age_client.text(),
                         self.lineEdit_phone_num_client.text())
                     print(result)
+                    answer = add_new_client(result)
+                    if answer == True:
+                        pass
         else:
             self.label_error_name_client.setText('В имени не бывает цифр!')
 
