@@ -48,16 +48,17 @@ class Ui_Add_client(object):
         self.label_name_client.setText(_translate("Add_client", "Введите имя нового клиента:"))
         self.age_client.setText(_translate("Add_client", "Укажите возраст:"))
         self.Phone_number_client.setText(_translate("Add_client", "Укажите номер телефона:"))
+
+        self.pushButton.clicked.connect(self.add)
+
     def add(self):
-        if self.pushButton.isChecked():
-            result = (self.lineEdit_name_client.text(),self.lineEdit_age_client.text(),self.Phone_number_client.text())
-            return result
-
-
+        result = (self.lineEdit_name_client.text(), self.lineEdit_age_client.text(), self.Phone_number_client.text())
+        return result
 
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     Add_client = QtWidgets.QDialog()
     ui = Ui_Add_client()
