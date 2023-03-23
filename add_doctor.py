@@ -12,6 +12,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_Add_doctor(object):
+
     def setupUi(self, Add_doctor):
         Add_doctor.setObjectName("Add_doctor")
         Add_doctor.resize(487, 177)
@@ -65,9 +66,56 @@ class Ui_Add_doctor(object):
         self.label_position_doctor.setText(_translate("Add_doctor", "Укажите профобласть:"))
         self.label_doct_phone_number.setText(_translate("Add_doctor", "Укажите телефонный номер:"))
 
+        self.Confirm_add_doctor.clicked.connect(self.add_doctor)
+        ttt = ('aaaa', 'dddd', 'ssss')
+        for x in ttt:
+            self.comboBox.addItem(x)
+
+
+    def check_phone_num(self):
+        if self.lineEdit_phone_num_doctor.text() != '':
+            self.label_error_phone_number_doctor.setText('')
+            if self.lineEdit_phone_num_doctor.text() != '375':
+                self.label_error_phone_number_doctor.setText('')
+                if self.lineEdit_phone_num_doctor.text().isdigit():
+                    self.label_error_phone_number_doctor.setText('')
+                    if len(self.lineEdit_phone_num_doctor.text()) == 12:
+                        self.label_error_phone_number_doctor.setText('')
+                        return True
+                    else:
+                        self.label_error_phone_number_doctor.setText('Мало цифр для номера!')
+                        return False
+                else:
+                    self.label_error_phone_number_doctor.setText('Только цифры!!!')
+                    return False
+            else:
+                self.label_error_phone_number_doctor.setText('Вы ничего не ввели!')
+                return False
+        else:
+            self.label_error_phone_number_doctor.setText('Поле пустое!!!')
+            return False
+
+    def add_doctor(self):
+        name = any(x.isdigit() for x in self.lineEdit.text())
+        if name == False:
+            self.label_error_name_doctor.setText('')
+            if self.check_phone_num() == True:
+                if self.dateEdit.text() != '01.01.2000':
+                    if self.comboBox.lineEdit().text() != '':
+                        self.lineEdit.setReadOnly(True)
+                        self.lineEdit_phone_num_doctor.setReadOnly(True)
+                        self.dateEdit.setReadOnly(True)
+                        self.comboBox.lineEdit().setReadOnly(True)
+                        result = (self.lineEdit.text(), self.dateEdit.text(), self.lineEdit_phone_num_doctor.text(),
+                                  self.comboBox.lineEdit().text())
+                        print(result)
+        else:
+            self.label_error_name_doctor.setText('В имени не бывает цифр!')
+
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     Add_doctor = QtWidgets.QDialog()
     ui = Ui_Add_doctor()

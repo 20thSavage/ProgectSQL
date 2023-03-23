@@ -66,9 +66,13 @@ class Ui_Add_client(object):
 
     def check_phone_num(self):
         if self.lineEdit_phone_num_client.text() != '':
+            self.label_error_phone_num_client.setText('')
             if self.lineEdit_phone_num_client.text() != '375':
+                self.label_error_phone_num_client.setText('')
                 if self.lineEdit_phone_num_client.text().isdigit():
+                    self.label_error_phone_num_client.setText('')
                     if len(self.lineEdit_phone_num_client.text()) == 12:
+                        self.label_error_phone_num_client.setText('')
                         return True
                     else:
                         self.label_error_phone_num_client.setText('Мало цифр для номера!')
@@ -86,6 +90,7 @@ class Ui_Add_client(object):
     def add_client(self):
         name = any(x.isdigit() for x in self.lineEdit_name_client.text())
         if name == False:
+            self.label_error_name_client.setText('')
             if self.check_phone_num() == True:
                 self.lineEdit_name_client.setReadOnly(True)
                 self.lineEdit_phone_num_client.setReadOnly(True)

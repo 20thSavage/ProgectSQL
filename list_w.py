@@ -45,6 +45,8 @@ class Ui_list(object):
         self.del_btn.setText(_translate("list", "Удалить запись"))
 
 
+
+
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
