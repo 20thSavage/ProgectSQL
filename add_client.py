@@ -9,6 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from FUNCTION import add_new_client
 
 
 class Ui_Add_client(object):
@@ -53,15 +54,19 @@ class Ui_Add_client(object):
 
     def add(self):
         if self.lineEdit_phone_num_client.text().isdigit() and self.lineEdit_phone_num_client.text()!='375':
-            if self.lineEdit_age_client.text().isdigit() and self.lineEdit_age_client.text()!='375':
+            if self.lineEdit_age_client.text().isdigit():
                 result = (
                 self.lineEdit_name_client.text(), self.lineEdit_age_client.text(), self.lineEdit_phone_num_client.text())
                 print(result)
-                Add_client.close()
+                self.lineEdit_phone_num_client.setReadOnly(True)
+                self.lineEdit_age_client.setReadOnly(True)
+                self.lineEdit_name_client.setReadOnly(True)
+
             else:
                 print('false')
         else:
             print("false")
+
 
 
 
