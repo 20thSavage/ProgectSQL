@@ -44,7 +44,7 @@ class Ui_Add_client(object):
         _translate = QtCore.QCoreApplication.translate
         Add_client.setWindowTitle(_translate("Add_client", "Add_client"))
         self.pushButton.setText(_translate("Add_client", "Подтвердить"))
-        self.lineEdit_phone_num_client.setText(_translate("Add_client", "+375"))
+        self.lineEdit_phone_num_client.setText(_translate("Add_client", "375"))
         self.label_name_client.setText(_translate("Add_client", "Введите имя нового клиента:"))
         self.age_client.setText(_translate("Add_client", "Укажите возраст:"))
         self.Phone_number_client.setText(_translate("Add_client", "Укажите номер телефона:"))
@@ -52,8 +52,17 @@ class Ui_Add_client(object):
         self.pushButton.clicked.connect(self.add)
 
     def add(self):
-        result = (self.lineEdit_name_client.text(), self.lineEdit_age_client.text(), self.Phone_number_client.text())
-        return result
+        if self.lineEdit_phone_num_client.text().isdigit() and self.lineEdit_phone_num_client.text()!='375':
+            if self.lineEdit_age_client.text().isdigit() and self.lineEdit_age_client.text()!='375':
+                result = (
+                self.lineEdit_name_client.text(), self.lineEdit_age_client.text(), self.lineEdit_phone_num_client.text())
+                print(result)
+                Add_client.close()
+            else:
+                print('false')
+        else:
+            print("false")
+
 
 
 if __name__ == "__main__":
