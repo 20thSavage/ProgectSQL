@@ -9,6 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from add_client import Ui_Add_client
 
 
 class Ui_Main_window(object):
