@@ -49,8 +49,9 @@ class Ui_Add_client(object):
         self.age_client.setText(_translate("Add_client", "Укажите возраст:"))
         self.Phone_number_client.setText(_translate("Add_client", "Укажите номер телефона:"))
     def add(self):
-
-        result = (self.lineEdit_name_client.text(),self.lineEdit_age_client.text(),self.Phone_number_client.text())
+        if self.pushButton.isChecked():
+            result = (self.lineEdit_name_client.text(),self.lineEdit_age_client.text(),self.Phone_number_client.text())
+            return result
 
 
 
