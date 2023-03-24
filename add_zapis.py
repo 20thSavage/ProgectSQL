@@ -51,6 +51,17 @@ class Ui_Zapis(object):
         self.label_choice_data_time.setText(_translate("Zapis", "Выберите дату и время:"))
         self.Confirm_zapis.setText(_translate("Zapis", "Подтвердить"))
 
+        self.Confirm_zapis.clicked.connect(self.add_zapis)
+
+
+
+    def add_zapis(self):
+        if self.comboBox_doctors.lineEdit().text()!='':
+            if self.comboBox_service.lineEdit().text()!='':
+                if self.comboBox_data_time.lineEdit().text()!='':
+                    result = (self.comboBox_doctors.lineEdit().text(),self.comboBox_service.lineEdit().text(),self.comboBox_data_time.lineEdit().text())
+                    print(result)
+
 
 if __name__ == "__main__":
     import sys

@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Add_servis(object):
     def setupUi(self, Add_servis):
         Add_servis.setObjectName("Add_servis")
-        Add_servis.resize(482, 163)
+        Add_servis.resize(482, 186)
         self.Line_edit_name_service = QtWidgets.QLineEdit(Add_servis)
         self.Line_edit_name_service.setGeometry(QtCore.QRect(30, 40, 191, 41))
         self.Line_edit_name_service.setObjectName("Line_edit_name_service")
@@ -25,12 +25,16 @@ class Ui_Add_servis(object):
         self.label_servis.setGeometry(QtCore.QRect(40, 10, 171, 20))
         self.label_servis.setObjectName("label_servis")
         self.label_servis_data_time = QtWidgets.QLabel(Add_servis)
-        self.label_servis_data_time.setGeometry(QtCore.QRect(40, 100, 181, 20))
+        self.label_servis_data_time.setGeometry(QtCore.QRect(40, 120, 181, 20))
         self.label_servis_data_time.setObjectName("label_servis_data_time")
         self.comboBox = QtWidgets.QComboBox(Add_servis)
-        self.comboBox.setGeometry(QtCore.QRect(30, 130, 191, 22))
+        self.comboBox.setGeometry(QtCore.QRect(30, 150, 191, 22))
         self.comboBox.setEditable(True)
         self.comboBox.setObjectName("comboBox")
+        self.label_error_name_servis = QtWidgets.QLabel(Add_servis)
+        self.label_error_name_servis.setGeometry(QtCore.QRect(34, 90, 241, 20))
+        self.label_error_name_servis.setText("")
+        self.label_error_name_servis.setObjectName("label_error_name_servis")
 
         self.retranslateUi(Add_servis)
         QtCore.QMetaObject.connectSlotsByName(Add_servis)
@@ -42,9 +46,23 @@ class Ui_Add_servis(object):
         self.label_servis.setText(_translate("Add_servis", "Введите название услуги"))
         self.label_servis_data_time.setText(_translate("Add_servis", "Выберите профобласть:"))
 
+        self.Confirm_add_servis.clicked.connect(self.add_servis)
+        temp = ('aaa', 'bbb', 'ccc')
+        for x in temp:
+            self.comboBox.addItem(x)
+
+    def add_servis(self):
+        if self.Line_edit_name_service.text() != '':
+            if self.comboBox.lineEdit().text() != '':
+                result = (self.Line_edit_name_service.text(), self.comboBox.lineEdit().text())
+                print(result)
+        else:
+            self.label_error_name_servis.setText('Это поле обязательно к заполнению')
+
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     Add_servis = QtWidgets.QDialog()
     ui = Ui_Add_servis()
