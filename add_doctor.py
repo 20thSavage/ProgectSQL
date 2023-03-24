@@ -109,7 +109,7 @@ class Ui_Add_doctor(object):
                         self.comboBox.lineEdit().setReadOnly(True)
                         result = (self.lineEdit.text(), self.dateEdit.text(), self.lineEdit_phone_num_doctor.text(),
                                   self.comboBox.lineEdit().text())
-                        print(result)
+                        # print(result)
                         answer = True
                         if answer == True:
                             sucsess = QtWidgets.QDialog()
