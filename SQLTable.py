@@ -1,6 +1,6 @@
-import sqlite3
-# -*- coding: utf-8 -*-
-con = sqlite3.connect('server.db',check_same_thread=False)
+import sqlite3 as sl
+
+con = sl.connect('server.db',check_same_thread=False)
 
 with con:
     con.execute("""CREATE TABLE IF NOT EXISTS EMPLOYERS(
@@ -10,9 +10,22 @@ with con:
             phone_num BIGINT NOT NULL,
             position INTEGER NOT NULL,
             UNIQUE(phone_num))""")
-
-
-
+    con.execute("""CREATE TABLE IF NOT EXISTS POSITION(
+            id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL,
+            salary BIGINT NOT NULL,
+            service INT NOT NULL)""")
+    con.execute("""CREATE TABLE IF NOT EXISTS SERVICE(
+            id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL,
+            price BIGINT NOT NULL,
+            time TEXT NOT NULL)""")
+    con.execute("""CREATE TABLE IF NOT EXISTS ORDERS(
+                   id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+                   client INTEGER NOT NULL,
+                   service INTEGER NOT NULL,
+                   employer INTEGER NOT NULL,
+                   time INTEGER)""")
     con.execute("""CREATE TABLE IF NOT EXISTS CLIENT_BASE(
             id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
             name TEXT NOT NULL,
@@ -23,14 +36,20 @@ with con:
 
 sql_insert = "INSERT OR IGNORE INTO EMPLOYERS (name, year, phone_num,position) values(?,?,?,?)"
 sql_insert1 = "INSERT OR IGNORE INTO POSITION (name, salary, service) values(?,?,?)"
+sql_insert2 = "INSERT OR IGNORE INTO SERVICE (name, price, time) values(?,?,?)"
+sql_insert3 = "INSERT OR IGNORE INTO CLIENT_BASE (name,age,phone_num) values(?,?,?)"
+
+
 
 with con:
     con.executemany(sql_insert,(['Анищенко Игорь Николаевич','28-03-1989',80298982048,2],['Журавлева Жанна Александровна','23-11-1976',80336655489,2],['Дмитревич Ирина Евгеньевна','03-03-1989',80336655431,3],['Васильев Егор Дмитриевич','13-10-2001',80298800533,1],['Ильин Александр Вальеревич','20-09-1994',80297503001,2],['Алиев Денис Викторович','17-03-1992',80296861702,4],['Александровна Екатерина Ильинична','16-11-1994',80293333212,1],['Гаевская Ксения Александровна','01-01-1998',80295143757,2],['Фирсин Игорь Анатольевич','09-12-1976',80291488228,3],['Атрощенко Зинаида Степановна','01-02-1954',80298893134,5]))
-
-
+    con.executemany(sql_insert1,(['Васильев Егор Дмитриевич',2400,1],['Александровна Екатерина Ильинична',2100,1],['Анищенко Игорь Николаевич',1800,2],['Журавлева Жанна Александровна',1900,2],['Ильин Александр Вальеревич',1600,2],['Гаевская Ксения Александровна',1760,2],['Дмитревич Ирина Евгеньевна',2200,3],['Фирсин Игорь Анатольевич',2100,3],['Алиев Денис Викторович',2800,4],['Атрощенко Зинаида Степановна',2550,5]))
+    con.executemany(sql_insert2,(['УЗИ',100,'10-00'],['Генетическое исследование',90,'10-10'],['Определение пола плода',90,'10-30'],['Клинический анализ крови',70,'11-00'],['Биохимическое исследование',190,'11-00'],['Гормональное исследование',150,'11-30'],['Иммунологическое исследование',30,'11-30'],['Цитологические исследования',160,'12-00'],['Диагностика инфекционных заболеваний',180,'12-00'],['Анализ крови',40,'12-00']))
+    con.executemany(sql_insert3,(['Муравьёва Джема Арсеньевна',19,80333833737],['Елисеева Яна Эльдаровна',27,80333137786],['Дементьева Устинья Парфеньевна',31,80299929873],['Григорьева Анэля Гордеевна',21,80292212324],['Капустина Альжбета Арсеньевна',35,80297465831],['Петухова Эмилия Семеновна',23,80296677898],['Уварова Эстелла Юлиановна',18,809993909],['Ермакова Марианна Дмитрьевна',41,80337767000],['Евсеев Вячеслав Даниилович',33,80294144578],['Орлов Ким Тарасович',47,80299999342]))
+    con.execute("INSERT INTO ORDERS (client,service,employer,time) values(?,?,?,CURRENT_TIMESTAMP)", (1, 1, 1))
 
 
 with con:
-    data = con.execute("SELECT * FROM EMPLOYERS")
+    data = con.execute("SELECT * FROM EMPLOYERS,POSITION,SERVICE,CLIENT_BASE,ORDERS")
     print(data)
     print(data.fetchall())
