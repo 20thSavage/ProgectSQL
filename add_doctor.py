@@ -9,7 +9,8 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+from sucsessful_wndw import Ui_Sucsessful_windw
+from error_wndw import Ui_Error_windw
 
 class Ui_Add_doctor(object):
 
@@ -109,6 +110,20 @@ class Ui_Add_doctor(object):
                         result = (self.lineEdit.text(), self.dateEdit.text(), self.lineEdit_phone_num_doctor.text(),
                                   self.comboBox.lineEdit().text())
                         print(result)
+                        answer = True
+                        if answer == True:
+                            sucsess = QtWidgets.QDialog()
+                            ui2 = Ui_Sucsessful_windw()
+                            ui2.setupUi(sucsess)
+                            sucsess.show()
+                            sucsess.exec_()
+                            Add_doctor.close()
+                        else:
+                            error = QtWidgets.QDialog()
+                            ui2 = Ui_Error_windw()
+                            ui2.setupUi(error)
+                            error.show()
+                            error.exec_()
         else:
             self.label_error_name_doctor.setText('В имени не бывает цифр!')
 

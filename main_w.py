@@ -16,9 +16,9 @@ class Ui_Main_window(object):
     def setupUi(self, Main_window):
         Main_window.setObjectName("Main_window")
         Main_window.resize(627, 246)
-        self.Uslugi = QtWidgets.QPushButton(Main_window)
-        self.Uslugi.setGeometry(QtCore.QRect(30, 130, 121, 91))
-        self.Uslugi.setObjectName("Uslugi")
+        self.servis = QtWidgets.QPushButton(Main_window)
+        self.servis.setGeometry(QtCore.QRect(30, 130, 121, 91))
+        self.servis.setObjectName("servis")
         self.doctors = QtWidgets.QPushButton(Main_window)
         self.doctors.setGeometry(QtCore.QRect(180, 130, 121, 91))
         self.doctors.setObjectName("doctors")
@@ -35,10 +35,32 @@ class Ui_Main_window(object):
     def retranslateUi(self, Main_window):
         _translate = QtCore.QCoreApplication.translate
         Main_window.setWindowTitle(_translate("Main_window", "main_windw"))
-        self.Uslugi.setText(_translate("Main_window", "Услуги"))
+        self.servis.setText(_translate("Main_window", "Услуги"))
         self.doctors.setText(_translate("Main_window", "Врачи"))
         self.clients.setText(_translate("Main_window", "Клиенты"))
         self.zapis.setText(_translate("Main_window", "Запись"))
+
+        self.servis.clicked.connect(self.servis_)
+        self.doctors.clicked.connect(self.doctors_)
+        self.clients.clicked.connect(self.clients_)
+        self.zapis.clicked.connect(self.zapis_)
+
+
+
+    def servis_(self):
+        print('dadadad')
+
+
+    def doctors_(self):
+        pass
+
+
+    def clients_(self):
+        pass
+
+
+    def zapis_(self):
+        pass
 
 
 if __name__ == "__main__":

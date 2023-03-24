@@ -9,7 +9,8 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+from sucsessful_wndw import Ui_Sucsessful_windw
+from error_wndw import Ui_Error_windw
 
 class Ui_Add_servis(object):
     def setupUi(self, Add_servis):
@@ -54,8 +55,24 @@ class Ui_Add_servis(object):
     def add_servis(self):
         if self.Line_edit_name_service.text() != '':
             if self.comboBox.lineEdit().text() != '':
+                self.Line_edit_name_service.setReadOnly(True)
+                self.comboBox.lineEdit().setReadOnly(True)
                 result = (self.Line_edit_name_service.text(), self.comboBox.lineEdit().text())
                 print(result)
+                answer = True
+                if answer == True:
+                    sucsess = QtWidgets.QDialog()
+                    ui2 = Ui_Sucsessful_windw()
+                    ui2.setupUi(sucsess)
+                    sucsess.show()
+                    sucsess.exec_()
+                    Add_servis.close()
+                else:
+                    error = QtWidgets.QDialog()
+                    ui2 = Ui_Error_windw()
+                    ui2.setupUi(error)
+                    error.show()
+                    error.exec_()
         else:
             self.label_error_name_servis.setText('Это поле обязательно к заполнению')
 

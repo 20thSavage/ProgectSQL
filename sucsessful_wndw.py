@@ -23,13 +23,13 @@ class Ui_Sucsessful_windw(object):
         self.label.setFont(font)
         self.label.setAlignment(QtCore.Qt.AlignCenter)
         self.label.setObjectName("label")
-        self.pushButton_sucsessful = QtWidgets.QPushButton(Sucsessful_windw)
-        self.pushButton_sucsessful.setGeometry(QtCore.QRect(120, 90, 51, 28))
+        # self.pushButton_sucsessful = QtWidgets.QPushButton(Sucsessful_windw)
+        # self.pushButton_sucsessful.setGeometry(QtCore.QRect(120, 90, 51, 28))
         font = QtGui.QFont()
         font.setBold(False)
         font.setWeight(50)
-        self.pushButton_sucsessful.setFont(font)
-        self.pushButton_sucsessful.setObjectName("pushButton_sucsessful")
+        # self.pushButton_sucsessful.setFont(font)
+        # self.pushButton_sucsessful.setObjectName("pushButton_sucsessful")
 
         self.retranslateUi(Sucsessful_windw)
         QtCore.QMetaObject.connectSlotsByName(Sucsessful_windw)
@@ -38,12 +38,12 @@ class Ui_Sucsessful_windw(object):
         _translate = QtCore.QCoreApplication.translate
         Sucsessful_windw.setWindowTitle(_translate("Sucsessful_windw", "Sucsessful"))
         self.label.setText(_translate("Sucsessful_windw", "Все прошло успешно!!!"))
-        self.pushButton_sucsessful.setText(_translate("Sucsessful_windw", "ОК"))
+        # self.pushButton_sucsessful.setText(_translate("Sucsessful_windw", "ОК"))
 
-        self.pushButton_sucsessful.clicked.connect(self.close)
-
-    def close(self):
-        Sucsessful_windw.close()
+    #     self.pushButton_sucsessful.clicked.connect(self.close)
+    #
+    # def close(self):
+    #     Sucsessful_windw.close()
 
 
 if __name__ == "__main__":

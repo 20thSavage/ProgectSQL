@@ -9,7 +9,8 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+from sucsessful_wndw import Ui_Sucsessful_windw
+from error_wndw import Ui_Error_windw
 
 class Ui_Zapis(object):
     def setupUi(self, Zapis):
@@ -59,8 +60,25 @@ class Ui_Zapis(object):
         if self.comboBox_doctors.lineEdit().text()!='':
             if self.comboBox_service.lineEdit().text()!='':
                 if self.comboBox_data_time.lineEdit().text()!='':
+                    self.comboBox_doctors.lineEdit().setReadOnly(True)
+                    self.comboBox_service.lineEdit().setReadOnly(True)
+                    self.comboBox_data_time.lineEdit().setReadOnly(True)
                     result = (self.comboBox_doctors.lineEdit().text(),self.comboBox_service.lineEdit().text(),self.comboBox_data_time.lineEdit().text())
                     print(result)
+                    answer = False
+                    if answer == True:
+                        sucsess = QtWidgets.QDialog()
+                        ui2 = Ui_Sucsessful_windw()
+                        ui2.setupUi(sucsess)
+                        sucsess.show()
+                        sucsess.exec_()
+                        Zapis.close()
+                    else:
+                        error = QtWidgets.QDialog()
+                        ui2 = Ui_Error_windw()
+                        ui2.setupUi(error)
+                        error.show()
+                        error.exec_()
 
 
 if __name__ == "__main__":

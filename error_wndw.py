@@ -23,13 +23,13 @@ class Ui_Error_windw(object):
         self.label.setFont(font)
         self.label.setAlignment(QtCore.Qt.AlignCenter)
         self.label.setObjectName("label")
-        self.pushButton_error = QtWidgets.QPushButton(Error_windw)
-        self.pushButton_error.setGeometry(QtCore.QRect(110, 100, 51, 28))
+        # self.pushButton_error = QtWidgets.QPushButton(Error_windw)
+        # self.pushButton_error.setGeometry(QtCore.QRect(110, 100, 51, 28))
         font = QtGui.QFont()
         font.setBold(False)
         font.setWeight(50)
-        self.pushButton_error.setFont(font)
-        self.pushButton_error.setObjectName("pushButton_error")
+        # self.pushButton_error.setFont(font)
+        # self.pushButton_error.setObjectName("pushButton_error")
 
         self.retranslateUi(Error_windw)
         QtCore.QMetaObject.connectSlotsByName(Error_windw)
@@ -41,7 +41,7 @@ class Ui_Error_windw(object):
 "Мы попытаемся это поправить\n"
 "Несмотря на криворукость инженеров\n"
 "Попробуйте позже!"))
-        self.pushButton_error.setText(_translate("Error_windw", "ОК"))
+        # self.pushButton_error.setText(_translate("Error_windw", "ОК"))
 
 
 if __name__ == "__main__":
