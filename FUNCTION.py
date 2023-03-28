@@ -71,6 +71,7 @@ def change_table(name, ids, kort):
     with con:
         if name == 'EMPLOYERS':
             try:
+                cursor = con.cursor()
                 update = "UPDATE EMPLOYERS SET name,year,phone_num,position=?,?,?,? WHERE id=?"
                 data = (kort, ids)
                 cursor.execute(update, data)
@@ -81,6 +82,7 @@ def change_table(name, ids, kort):
                 return erradd
         if name == 'CLIENT_BASE':
             try:
+                cursor = con.cursor()
                 update = "UPDATE CLIENT_BASE SET name,age,phone_num=?,?,?, WHERE id=?"
                 data = (kort, ids)
                 cursor.execute(update, data)
@@ -91,6 +93,7 @@ def change_table(name, ids, kort):
                 return erradd
         if name == 'POSITION':
             try:
+                cursor = con.cursor()
                 update = "UPDATE POSITION SET name,salary,service=?,?,? WHERE id=?"
                 data = (kort, ids)
                 cursor.execute(update, data)
@@ -101,6 +104,7 @@ def change_table(name, ids, kort):
                 return erradd
         if name == 'SERVICE':
             try:
+                cursor = con.cursor()
                 update = "UPDATE SERVICE SET name,price,time=?,?,? WHERE id=?"
                 data = (kort, ids)
                 cursor.execute(update, data)
