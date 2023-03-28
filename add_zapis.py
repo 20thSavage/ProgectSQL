@@ -9,13 +9,12 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from sucsessful_wndw import Ui_Sucsessful_windw
-from error_wndw import Ui_Error_windw
+
 
 class Ui_Zapis(object):
     def setupUi(self, Zapis):
         Zapis.setObjectName("Zapis")
-        Zapis.resize(579, 252)
+        Zapis.resize(779, 252)
         self.comboBox_service = QtWidgets.QComboBox(Zapis)
         self.comboBox_service.setGeometry(QtCore.QRect(10, 40, 161, 22))
         self.comboBox_service.setEditable(True)
@@ -35,11 +34,21 @@ class Ui_Zapis(object):
         self.comboBox_data_time.setEditable(True)
         self.comboBox_data_time.setObjectName("comboBox_data_time")
         self.label_choice_data_time = QtWidgets.QLabel(Zapis)
-        self.label_choice_data_time.setGeometry(QtCore.QRect(384, 10, 151, 20))
+        self.label_choice_data_time.setGeometry(QtCore.QRect(580, 10, 151, 20))
         self.label_choice_data_time.setObjectName("label_choice_data_time")
         self.Confirm_zapis = QtWidgets.QPushButton(Zapis)
-        self.Confirm_zapis.setGeometry(QtCore.QRect(470, 170, 93, 71))
+        self.Confirm_zapis.setGeometry(QtCore.QRect(320, 170, 93, 71))
         self.Confirm_zapis.setObjectName("Confirm_zapis")
+        self.label_choice_data_time_2 = QtWidgets.QLabel(Zapis)
+        self.label_choice_data_time_2.setGeometry(QtCore.QRect(580, 10, 151, 20))
+        self.label_choice_data_time_2.setText("")
+        self.label_choice_data_time_2.setObjectName("label_choice_data_time_2")
+        self.dateEdit = QtWidgets.QDateEdit(Zapis)
+        self.dateEdit.setGeometry(QtCore.QRect(580, 40, 161, 22))
+        self.dateEdit.setObjectName("dateEdit")
+        self.label_client_name = QtWidgets.QLabel(Zapis)
+        self.label_client_name.setGeometry(QtCore.QRect(384, 10, 151, 20))
+        self.label_client_name.setObjectName("label_client_name")
 
         self.retranslateUi(Zapis)
         QtCore.QMetaObject.connectSlotsByName(Zapis)
@@ -51,34 +60,7 @@ class Ui_Zapis(object):
         self.label_choice_doctor.setText(_translate("Zapis", "Выберите доктора:"))
         self.label_choice_data_time.setText(_translate("Zapis", "Выберите дату и время:"))
         self.Confirm_zapis.setText(_translate("Zapis", "Подтвердить"))
-
-        self.Confirm_zapis.clicked.connect(self.add_zapis)
-
-
-
-    def add_zapis(self):
-        if self.comboBox_doctors.lineEdit().text()!='':
-            if self.comboBox_service.lineEdit().text()!='':
-                if self.comboBox_data_time.lineEdit().text()!='':
-                    self.comboBox_doctors.lineEdit().setReadOnly(True)
-                    self.comboBox_service.lineEdit().setReadOnly(True)
-                    self.comboBox_data_time.lineEdit().setReadOnly(True)
-                    result = (self.comboBox_doctors.lineEdit().text(),self.comboBox_service.lineEdit().text(),self.comboBox_data_time.lineEdit().text())
-                    print(result)
-                    answer = False
-                    if answer == True:
-                        sucsess = QtWidgets.QDialog()
-                        ui2 = Ui_Sucsessful_windw()
-                        ui2.setupUi(sucsess)
-                        sucsess.show()
-                        sucsess.exec_()
-                        Zapis.close()
-                    else:
-                        error = QtWidgets.QDialog()
-                        ui2 = Ui_Error_windw()
-                        ui2.setupUi(error)
-                        error.show()
-                        error.exec_()
+        self.label_client_name.setText(_translate("Zapis", "Укажите имя клиента:"))
 
 
 if __name__ == "__main__":

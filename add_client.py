@@ -97,9 +97,8 @@ class Ui_Add_client(object):
                 self.dateEdit.setReadOnly(True)
                 result = (
                 self.lineEdit_name_client.text(), self.dateEdit.text(), self.lineEdit_phone_num_client.text())
-                print(result)
-                # answer = add_new_client(result)
-                answer = False
+                # print(result)
+                answer = add_new_client(result)
                 if answer == True:
                     sucsess = QtWidgets.QDialog()
                     ui2 = Ui_Sucsessful_windw()
