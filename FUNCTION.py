@@ -133,25 +133,19 @@ def comeback_table():
                 dict_service.update({x[0]: x[1]})
         except:
             pass
-    all_dicts.append(dict_doctor)
     all_dicts.append(dict_service)
+    all_dicts.append(dict_doctor)
     all_dicts.append(dict_client)
     return all_dicts
 
 def record (id):
     with con:
         try:
-            cursor = con.cursor()
             add = "INSERT OR IGNORE INTO ORDERS (client,service,employer) values(?,?,?)"
-            cursor.execute(add, id)
-            con.commit()
-            cursor.close()
+            data = (add,id)
             return True
-        except Exception as errrecord:
-            return errrecord
-
-def show_service(name):
-
+        except Exception as err:
+            return err
 
 
 
