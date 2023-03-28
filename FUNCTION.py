@@ -150,6 +150,9 @@ def record (id):
         except Exception as errrecord:
             return errrecord
 
+def show_service(name):
+
+
 
 
 
