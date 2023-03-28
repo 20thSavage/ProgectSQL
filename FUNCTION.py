@@ -1,36 +1,43 @@
 import sqlite3
 
-con = sqlite3.connect('server.db',check_same_thread=False)
+con = sqlite3.connect('server.db', check_same_thread=False)
+
+
 def add_new_client(data):
     with con:
         try:
             insert = "INSERT OR IGNORE INTO CLIENT_BASE (name,age,phone_num) values(?,?,?)"
-            con.execute(insert,data)
+            con.execute(insert, data)
             return True
         except Exception as err:
             return err
+
+
 def add_employers(data):
     with con:
         try:
             insert = "INSERT OR IGNORE INTO EMPLOYERS (name,year,phone_num,position) values(?,?,?,?)"
-            con.execute(insert,data)
+            con.execute(insert, data)
             return True
         except Exception as err:
             return err
+
 
 def add_service(data):
     with con:
         try:
             insert = "INSERT OR IGNORE INTO SERVICE (name,price,time) values(?,?,?)"
-            con.execute(insert,data)
+            con.execute(insert, data)
             return True
         except Exception as err:
             return err
+
+
 def return_table(data):
     with con:
         if data == 'EMPLOYERS':
             try:
-                data=con.execute("SELECT * FROM EMPLOYER")
+                data = con.execute("SELECT * FROM EMPLOYER")
                 return data
             except Exception as employererr:
                 return employererr
@@ -59,12 +66,13 @@ def return_table(data):
             except Exception as orderserr:
                 return orderserr
 
-def change_table(name,ids,kort):
+
+def change_table(name, ids, kort):
     with con:
         if name == 'EMPLOYERS':
             try:
-                update="UPDATE EMPLOYERS SET name,year,phone_num,position=?,?,?,? WHERE id=?"
-                data =(kort,ids)
+                update = "UPDATE EMPLOYERS SET name,year,phone_num,position=?,?,?,? WHERE id=?"
+                data = (kort, ids)
                 cursor.execute(update, data)
                 con.commit()
                 cursor.close()
@@ -73,8 +81,8 @@ def change_table(name,ids,kort):
                 return erradd
         if name == 'CLIENT_BASE':
             try:
-                update="UPDATE CLIENT_BASE SET name,age,phone_num=?,?,?, WHERE id=?"
-                data =(kort,ids)
+                update = "UPDATE CLIENT_BASE SET name,age,phone_num=?,?,?, WHERE id=?"
+                data = (kort, ids)
                 cursor.execute(update, data)
                 con.commit()
                 cursor.close()
@@ -83,8 +91,8 @@ def change_table(name,ids,kort):
                 return erradd
         if name == 'POSITION':
             try:
-                update="UPDATE POSITION SET name,salary,service=?,?,? WHERE id=?"
-                data =(kort,ids)
+                update = "UPDATE POSITION SET name,salary,service=?,?,? WHERE id=?"
+                data = (kort, ids)
                 cursor.execute(update, data)
                 con.commit()
                 cursor.close()
@@ -93,8 +101,8 @@ def change_table(name,ids,kort):
                 return erradd
         if name == 'SERVICE':
             try:
-                update="UPDATE SERVICE SET name,price,time=?,?,? WHERE id=?"
-                data =(kort,ids)
+                update = "UPDATE SERVICE SET name,price,time=?,?,? WHERE id=?"
+                data = (kort, ids)
                 cursor.execute(update, data)
                 con.commit()
                 cursor.close()
@@ -102,24 +110,29 @@ def change_table(name,ids,kort):
             except Exception as erradd:
                 return erradd
 
-def comeback_table(data):
+
+def comeback_table():
     with con:
         try:
-            dict_ = {}
-            uif=con.execute("SELECT id,name FROM EMPLOYERS,SERVICE,CLIENT BASE")
-            dict_.append
+            all_dicts=[]
+            dict_doctor = {}
+            dict_client = {}
+            dict_service = {}
+            select_doctor = con.execute("SELECT id,name FROM EMPLOYERS")
+            select_client = con.execute("SELECT id,name FROM CLIENT_BASE")
+            select_service = con.execute("SELECT id,name FROM SERVICE")
+            for x in select_doctor:
+                dict_doctor.update({x[0]: x[1]})
+            for x in select_client:
+                dict_client.update({x[0]: x[1]})
+            for x in select_service:
+                dict_service.update({x[0]: x[1]})
+        except:
+            pass
+    all_dicts.append(dict_doctor)
+    all_dicts.append(dict_service)
+    all_dicts.append(dict_client)
+    return all_dicts
 
 
-
-
-
-
-
-
-
-
-
-
-
-add_new_client(('Игорь',18,80293332211))
 
