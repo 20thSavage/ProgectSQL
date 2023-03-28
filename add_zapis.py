@@ -69,6 +69,7 @@ class Ui_Zapis(object):
             self.comboBox_doctors.addItem(v)
         for k, v in dict_clients.items():
             self.comboBox_clients.addItem(v)
+        print(main_l)
 
     def zapis(self):
         self.comboBox_clients.lineEdit().setReadOnly(True)
