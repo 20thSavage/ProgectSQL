@@ -141,11 +141,14 @@ def comeback_table():
 def record (id):
     with con:
         try:
+            cursor = con.cursor()
             add = "INSERT OR IGNORE INTO ORDERS (client,service,employer) values(?,?,?)"
-            data = (add,id)
+            cursor.execute(add, id)
+            con.commit()
+            cursor.close()
             return True
-        except Exception as err:
-            return err
+        except Exception as errrecord:
+            return errrecord
 
 
 
