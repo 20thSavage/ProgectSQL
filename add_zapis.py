@@ -75,9 +75,9 @@ class Ui_Zapis(object):
         self.comboBox_clients.lineEdit().setReadOnly(True)
         self.comboBox_service.lineEdit().setReadOnly(True)
         self.comboBox_doctors.lineEdit().setReadOnly(True)
+
         answer = []
-        result = [self.comboBox_clients.lineEdit().text(), self.comboBox_service.lineEdit().text(),
-                  self.comboBox_doctors.lineEdit().text()]
+
         main_l = comeback_table()
         dict_servis = main_l[0]
         dict_doctors = main_l[1]

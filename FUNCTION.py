@@ -37,7 +37,7 @@ def return_table(data):
     with con:
         if data == 'EMPLOYERS':
             try:
-                data = con.execute("SELECT * FROM EMPLOYER")
+                data = con.execute("SELECT * FROM EMPLOYERS")
                 return data
             except Exception as employererr:
                 return employererr

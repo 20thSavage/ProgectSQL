@@ -9,8 +9,10 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from FUNCTION import return_table
 from sucsessful_wndw import Ui_Sucsessful_windw
 from error_wndw import Ui_Error_windw
+
 
 class Ui_Add_doctor(object):
 
@@ -68,9 +70,14 @@ class Ui_Add_doctor(object):
         self.label_doct_phone_number.setText(_translate("Add_doctor", "Укажите телефонный номер:"))
 
         self.Confirm_add_doctor.clicked.connect(self.add_doctor)
-        ttt = ('aaaa', 'dddd', 'ssss')
-        for x in ttt:
-            self.comboBox.addItem(x)
+        poz_dict = {}
+        poz = return_table('POSITION')
+        print(poz.fetchall())
+        for x in poz.fetchall():
+            poz_dict.update({x[0]:x[1]})
+        print(poz_dict)
+        for k,v in poz_dict.items():
+            self.comboBox.addItem(v)
 
 
     def check_phone_num(self):
@@ -107,23 +114,36 @@ class Ui_Add_doctor(object):
                         self.lineEdit_phone_num_doctor.setReadOnly(True)
                         self.dateEdit.setReadOnly(True)
                         self.comboBox.lineEdit().setReadOnly(True)
-                        result = (self.lineEdit.text(), self.dateEdit.text(), self.lineEdit_phone_num_doctor.text(),
-                                  self.comboBox.lineEdit().text())
-                        # print(result)
-                        answer = True
-                        if answer == True:
-                            sucsess = QtWidgets.QDialog()
-                            ui2 = Ui_Sucsessful_windw()
-                            ui2.setupUi(sucsess)
-                            sucsess.show()
-                            sucsess.exec_()
-                            Add_doctor.close()
-                        else:
-                            error = QtWidgets.QDialog()
-                            ui2 = Ui_Error_windw()
-                            ui2.setupUi(error)
-                            error.show()
-                            error.exec_()
+                        poz_dict = {}
+                        poz = return_table('POSITION')
+                        for x in poz.fetchall():
+                            poz_dict.update({x[0]: x[1]})
+                        # result = (self.lineEdit.text(), self.dateEdit.text(), self.lineEdit_phone_num_doctor.text(),
+                        #           self.comboBox.lineEdit().text())
+                        answ = []
+                        for k,v in poz_dict.items():
+                            if v == self.comboBox.lineEdit().text():
+                                answ.append(k)
+                        answ.append(self.lineEdit_phone_num_doctor.text())
+                        answ.append(self.dateEdit.text())
+                        answ.append(self.lineEdit.text())
+                        print(answ)
+
+
+                        # answer = True
+                        # if answer == True:
+                        #     sucsess = QtWidgets.QDialog()
+                        #     ui2 = Ui_Sucsessful_windw()
+                        #     ui2.setupUi(sucsess)
+                        #     sucsess.show()
+                        #     sucsess.exec_()
+                        #     Add_doctor.close()
+                        # else:
+                        #     error = QtWidgets.QDialog()
+                        #     ui2 = Ui_Error_windw()
+                        #     ui2.setupUi(error)
+                        #     error.show()
+                        #     error.exec_()
         else:
             self.label_error_name_doctor.setText('В имени не бывает цифр!')
 
