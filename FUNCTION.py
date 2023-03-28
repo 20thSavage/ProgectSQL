@@ -138,5 +138,15 @@ def comeback_table():
     all_dicts.append(dict_client)
     return all_dicts
 
+def record (id):
+    with con:
+        try:
+            add = "INSERT OR IGNORE INTO ORDERS (client,service,employer) values(?,?,?)"
+            data = (add,id)
+            return True
+        except Exception as err:
+            return err
+
+
 
 
