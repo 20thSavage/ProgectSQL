@@ -133,8 +133,8 @@ def comeback_table():
                 dict_service.update({x[0]: x[1]})
         except:
             pass
-    all_dicts.append(dict_doctor)
     all_dicts.append(dict_service)
+    all_dicts.append(dict_doctor)
     all_dicts.append(dict_client)
     return all_dicts
 
