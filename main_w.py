@@ -9,7 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+from FUNCTION import return_table
 
 
 class Ui_Main_window(object):
@@ -47,8 +47,10 @@ class Ui_Main_window(object):
 
 
 
+
     def servis_(self):
-        print('dadadad')
+        tbl = return_table('SERVICE')
+        print(tbl.fetchall())
 
 
     def doctors_(self):

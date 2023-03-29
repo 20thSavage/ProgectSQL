@@ -9,31 +9,43 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+from FUNCTION import add_service
+from sucsessful_wndw import Ui_Sucsessful_windw
+from error_wndw import Ui_Error_windw
 
 class Ui_Add_servis(object):
     def setupUi(self, Add_servis):
         Add_servis.setObjectName("Add_servis")
-        Add_servis.resize(346, 163)
+        Add_servis.resize(346, 260)
         self.Line_edit_price_service = QtWidgets.QLineEdit(Add_servis)
-        self.Line_edit_price_service.setGeometry(QtCore.QRect(30, 40, 111, 21))
+        self.Line_edit_price_service.setGeometry(QtCore.QRect(20, 140, 141, 21))
         self.Line_edit_price_service.setObjectName("Line_edit_price_service")
         self.Confirm_add_servis = QtWidgets.QPushButton(Add_servis)
         self.Confirm_add_servis.setGeometry(QtCore.QRect(220, 80, 93, 81))
         self.Confirm_add_servis.setObjectName("Confirm_add_servis")
         self.label_servis_price = QtWidgets.QLabel(Add_servis)
-        self.label_servis_price.setGeometry(QtCore.QRect(10, 10, 171, 20))
+        self.label_servis_price.setGeometry(QtCore.QRect(20, 110, 171, 20))
         self.label_servis_price.setObjectName("label_servis_price")
         self.label_error_price_servis = QtWidgets.QLabel(Add_servis)
         self.label_error_price_servis.setGeometry(QtCore.QRect(20, 70, 131, 20))
         self.label_error_price_servis.setText("")
         self.label_error_price_servis.setObjectName("label_error_price_servis")
         self.timeEdit = QtWidgets.QTimeEdit(Add_servis)
-        self.timeEdit.setGeometry(QtCore.QRect(30, 130, 121, 22))
+        self.timeEdit.setGeometry(QtCore.QRect(20, 220, 151, 22))
         self.timeEdit.setObjectName("timeEdit")
         self.label_time_servis = QtWidgets.QLabel(Add_servis)
-        self.label_time_servis.setGeometry(QtCore.QRect(14, 100, 161, 20))
+        self.label_time_servis.setGeometry(QtCore.QRect(20, 180, 161, 20))
         self.label_time_servis.setObjectName("label_time_servis")
+        self.label_name_servis = QtWidgets.QLabel(Add_servis)
+        self.label_name_servis.setGeometry(QtCore.QRect(24, 20, 141, 20))
+        self.label_name_servis.setObjectName("label_name_servis")
+        self.lineEdit = QtWidgets.QLineEdit(Add_servis)
+        self.lineEdit.setGeometry(QtCore.QRect(20, 50, 141, 22))
+        self.lineEdit.setObjectName("lineEdit")
+        self.label_error_name_servis = QtWidgets.QLabel(Add_servis)
+        self.label_error_name_servis.setGeometry(QtCore.QRect(24, 80, 131, 20))
+        self.label_error_name_servis.setText("")
+        self.label_error_name_servis.setObjectName("label_error_name_servis")
 
         self.retranslateUi(Add_servis)
         QtCore.QMetaObject.connectSlotsByName(Add_servis)
@@ -41,17 +53,43 @@ class Ui_Add_servis(object):
     def retranslateUi(self, Add_servis):
         _translate = QtCore.QCoreApplication.translate
         Add_servis.setWindowTitle(_translate("Add_servis", "Add_servis"))
+        self.Line_edit_price_service.setText(_translate("Add_servis", "Тут только цифры!"))
         self.Confirm_add_servis.setText(_translate("Add_servis", "Подтвердить"))
         self.label_servis_price.setText(_translate("Add_servis", "Введите ценник услуги:"))
-        self.label_time_servis.setText(_translate("Add_servis", "Длительность процедуры:"))
+        self.label_time_servis.setText(_translate("Add_servis", "Время процедуры:"))
+        self.label_name_servis.setText(_translate("Add_servis", "Название услуги:"))
 
         self.Confirm_add_servis.clicked.connect(self.add_serv)
-    def add_serv(self):
-        if self.Line_edit_price_service.text().isdigit() == True:
-            pass
-        else:
-            self.Line_edit_price_service.setText('цифры тут!')
 
+
+    def add_serv(self):
+        if self.lineEdit.text() != '':
+            if self.Line_edit_price_service.text() != 'Тут только цифры!':
+                if self.Line_edit_price_service.text().isdigit()==True:
+                    if self.timeEdit.text() != '0:00':
+                        self.lineEdit.setReadOnly(True)
+                        self.Line_edit_price_service.setReadOnly(True)
+                        self.timeEdit.setReadOnly(True)
+                        result = (self.lineEdit.text(),self.Line_edit_price_service.text(),self.timeEdit.text())
+                        print(result)
+                        answ = add_service(result)
+                        if answ == True:
+                            sucsess = QtWidgets.QDialog()
+                            ui2 = Ui_Sucsessful_windw()
+                            ui2.setupUi(sucsess)
+                            sucsess.show()
+                            sucsess.exec_()
+                            Add_servis.close()
+                        else:
+                            error = QtWidgets.QDialog()
+                            ui2 = Ui_Error_windw()
+                            ui2.setupUi(error)
+                            error.show()
+                            error.exec_()
+
+
+        else:
+            self.label_error_name_servis.setText('Это поле empty')
 
 
 if __name__ == "__main__":
