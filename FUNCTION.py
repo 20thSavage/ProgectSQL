@@ -38,31 +38,51 @@ def return_table(data):
         if data == 'EMPLOYERS':
             try:
                 data = con.execute("SELECT * FROM EMPLOYERS")
-                return data
+                titile = con.execute("PRAGMA table_info(EMPLOYERS)")
+                name = []
+                for i in titile:
+                    name.append(i[1])
+                return data,name
             except Exception as employererr:
                 return employererr
         if data == 'SERVICE':
             try:
                 data = con.execute("SELECT * FROM SERVICE")
-                return data
+                titile = con.execute("PRAGMA table_info(SERVICE)")
+                name = []
+                for i in titile:
+                    name.append(i[1])
+                return data,name
             except Exception as serviceerr:
                 return serviceerr
         if data == 'POSITION':
             try:
                 data = con.execute("SELECT * FROM POSITION")
-                return data
+                titile = con.execute("PRAGMA table_info(POSITION)")
+                name = []
+                for i in titile:
+                    name.append(i[1])
+                return data,name
             except Exception as positionerr:
                 return positionerr
         if data == "CLIENT_BASE":
             try:
                 data = con.execute("SELECT * FROM CLIENT_BASE")
-                return data
+                titile = con.execute("PRAGMA table_info(CLIENT_BASE)")
+                name = []
+                for i in titile:
+                    name.append(i[1])
+                return data,name
             except Exception as clienterr:
                 return clienterr
         if data == "ORDERS":
             try:
                 data = con.execute("SELECT * FROM ORDERS")
-                return data
+                titile = con.execute("PRAGMA table_info(ORDERS)")
+                name = []
+                for i in titile:
+                    name.append(i[1])
+                return data,name
             except Exception as orderserr:
                 return orderserr
 
@@ -138,14 +158,18 @@ def comeback_table():
     all_dicts.append(dict_client)
     return all_dicts
 
-def add_z(id):
+
+def record (id):
     with con:
         try:
-            add = "INSERT INTO ORDERS (employer,service,client,time) values(?,?,?,CURRENT_TIMESTAMP)"
-            con.execute (add,id)
+            add = "INSERT OR IGNORE INTO ORDERS (client,service,employer) values(?,?,?)"
+            data = (add,id)
             return True
         except Exception as err:
             return err
+
+
+
 
 
 
