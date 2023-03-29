@@ -12,7 +12,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from list_w import Ui_list
 from FUNCTION import return_table
 
-name_cols = ['id', 'name', 'price', 'time']
+
 
 
 class Ui_Main_window(object):
@@ -49,6 +49,7 @@ class Ui_Main_window(object):
         self.zapis.clicked.connect(self.zapis_)
 
     def servis_(self):
+        name_cols = ['id', 'name', 'price', 'time']
         tbl = return_table('SERVICE')
         app2 = QtWidgets.QDialog()
         ui2 = Ui_list()
@@ -79,13 +80,73 @@ class Ui_Main_window(object):
         app2.exec_()
 
     def doctors_(self):
-        pass
+        name_cols = ['id', 'name', 'year', 'phone','position']
+        tbl = return_table('EMPLOYERS')
+        app2 = QtWidgets.QDialog()
+        ui2 = Ui_list()
+        ui2.setupUi(app2)
+        ui2.tableWidget.setColumnCount(len(name_cols))
+        ui2.tableWidget.setRowCount(len(tbl.fetchall()))
+        ui2.tableWidget.setHorizontalHeaderLabels(name_cols)
+        tbl = return_table('EMPLOYERS')
+
+        index_row = 0
+
+        for tuuple in tbl.fetchall():
+            index_cow = 0
+            for obj in tuuple:
+                ui2.tableWidget.setItem(index_row, index_cow, QtWidgets.QTableWidgetItem(str(obj)))
+                index_cow += 1
+            index_row += 1
+
+        app2.show()
+        app2.exec_()
 
     def clients_(self):
-        pass
+        name_cols = ['id', 'name', 'age', 'phone']
+        tbl = return_table('CLIENT_BASE')
+        app2 = QtWidgets.QDialog()
+        ui2 = Ui_list()
+        ui2.setupUi(app2)
+        ui2.tableWidget.setColumnCount(len(name_cols))
+        ui2.tableWidget.setRowCount(len(tbl.fetchall()))
+        ui2.tableWidget.setHorizontalHeaderLabels(name_cols)
+        tbl = return_table('CLIENT_BASE')
+
+        index_row = 0
+
+        for tuuple in tbl.fetchall():
+            index_cow = 0
+            for obj in tuuple:
+                ui2.tableWidget.setItem(index_row, index_cow, QtWidgets.QTableWidgetItem(str(obj)))
+                index_cow += 1
+            index_row += 1
+
+        app2.show()
+        app2.exec_()
 
     def zapis_(self):
-        pass
+        name_cols = ['id', 'client', 'servis', 'doctor','time']
+        tbl = return_table('ORDERS')
+        app2 = QtWidgets.QDialog()
+        ui2 = Ui_list()
+        ui2.setupUi(app2)
+        ui2.tableWidget.setColumnCount(len(name_cols))
+        ui2.tableWidget.setRowCount(len(tbl.fetchall()))
+        ui2.tableWidget.setHorizontalHeaderLabels(name_cols)
+        tbl = return_table('ORDERS')
+
+        index_row = 0
+
+        for tuuple in tbl.fetchall():
+            index_cow = 0
+            for obj in tuuple:
+                ui2.tableWidget.setItem(index_row, index_cow, QtWidgets.QTableWidgetItem(str(obj)))
+                index_cow += 1
+            index_row += 1
+
+        app2.show()
+        app2.exec_()
 
 
 if __name__ == "__main__":
