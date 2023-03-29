@@ -10,7 +10,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from FUNCTION import comeback_table
-from FUNCTION import record
+from FUNCTION import add_zapis
 from sucsessful_wndw import Ui_Sucsessful_windw
 from error_wndw import Ui_Error_windw
 
@@ -93,7 +93,8 @@ class Ui_Zapis(object):
                 answer.append(k)
 
         answer = tuple(answer)
-        ans = record(answer)
+
+        ans = add_zapis(answer)
         if ans == True:
             sucsess = QtWidgets.QDialog()
             ui2 = Ui_Sucsessful_windw()

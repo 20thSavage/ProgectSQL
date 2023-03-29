@@ -9,6 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from list_w import Ui_list
 from FUNCTION import return_table
 
 
@@ -50,7 +51,20 @@ class Ui_Main_window(object):
 
     def servis_(self):
         tbl = return_table('SERVICE')
-        print(tbl.fetchall())
+
+        for x in tbl.fetchall():
+            print(x)
+            print(len(x))
+
+
+        app2 = QtWidgets.QDialog()
+        ui2 = Ui_list()
+        ui2.setupUi(app2)
+        app2.show()
+        app2.exec_()
+
+
+
 
 
     def doctors_(self):
