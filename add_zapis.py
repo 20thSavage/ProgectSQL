@@ -59,6 +59,7 @@ class Ui_Zapis(object):
         self.label_client_name.setText(_translate("Zapis", "Укажите имя клиента:"))
 
         self.Confirm_zapis.clicked.connect(self.zapis)
+        l = [self.comboBox_service, self.comboBox_doctors, self.comboBox_clients]
         main_l = comeback_table()
         dict_servis = main_l[0]
         dict_doctors = main_l[1]
@@ -69,7 +70,6 @@ class Ui_Zapis(object):
             self.comboBox_doctors.addItem(v)
         for k, v in dict_clients.items():
             self.comboBox_clients.addItem(v)
-        print(main_l)
 
     def zapis(self):
         self.comboBox_clients.lineEdit().setReadOnly(True)
@@ -102,18 +102,12 @@ class Ui_Zapis(object):
             sucsess.exec_()
             Zapis.close()
         else:
+            print(ans)
             error = QtWidgets.QDialog()
             ui2 = Ui_Error_windw()
             ui2.setupUi(error)
             error.show()
             error.exec_()
-
-
-
-
-
-
-
 
 
 if __name__ == "__main__":

@@ -15,9 +15,9 @@ class Ui_Add_servis(object):
     def setupUi(self, Add_servis):
         Add_servis.setObjectName("Add_servis")
         Add_servis.resize(346, 163)
-        self.Line_edit_name_service = QtWidgets.QLineEdit(Add_servis)
-        self.Line_edit_name_service.setGeometry(QtCore.QRect(30, 40, 111, 21))
-        self.Line_edit_name_service.setObjectName("Line_edit_name_service")
+        self.Line_edit_price_service = QtWidgets.QLineEdit(Add_servis)
+        self.Line_edit_price_service.setGeometry(QtCore.QRect(30, 40, 111, 21))
+        self.Line_edit_price_service.setObjectName("Line_edit_price_service")
         self.Confirm_add_servis = QtWidgets.QPushButton(Add_servis)
         self.Confirm_add_servis.setGeometry(QtCore.QRect(220, 80, 93, 81))
         self.Confirm_add_servis.setObjectName("Confirm_add_servis")
@@ -44,6 +44,14 @@ class Ui_Add_servis(object):
         self.Confirm_add_servis.setText(_translate("Add_servis", "Подтвердить"))
         self.label_servis_price.setText(_translate("Add_servis", "Введите ценник услуги:"))
         self.label_time_servis.setText(_translate("Add_servis", "Длительность процедуры:"))
+
+        self.Confirm_add_servis.clicked.connect(self.add_serv)
+    def add_serv(self):
+        if self.Line_edit_price_service.text().isdigit() == True:
+            pass
+        else:
+            self.Line_edit_price_service.setText('цифры тут!')
+
 
 
 if __name__ == "__main__":
