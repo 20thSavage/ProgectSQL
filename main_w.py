@@ -12,7 +12,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from list_w import Ui_list
 from FUNCTION import return_table
 
-name_cols = ['id','name','price','time']
+name_cols = ['id', 'name', 'price', 'time']
 
 
 class Ui_Main_window(object):
@@ -48,25 +48,29 @@ class Ui_Main_window(object):
         self.clients.clicked.connect(self.clients_)
         self.zapis.clicked.connect(self.zapis_)
 
-
-
-
     def servis_(self):
+        tbl = return_table('SERVICE')
         app2 = QtWidgets.QDialog()
         ui2 = Ui_list()
         ui2.setupUi(app2)
-        tbl = return_table('SERVICE')
         ui2.tableWidget.setColumnCount(len(name_cols))
         ui2.tableWidget.setRowCount(len(tbl.fetchall()))
         ui2.tableWidget.setHorizontalHeaderLabels(name_cols)
+        tbl = return_table('SERVICE')
 
-        print(tbl.fetchall())
+        index_row = 0
 
+        for tuuple in tbl.fetchall():
+            index_cow = 0
+            for obj in tuuple:
+                ui2.tableWidget.setItem(index_row, index_cow, QtWidgets.QTableWidgetItem(str(obj)))
+                index_cow += 1
+            index_row += 1
 
-
-
-
-
+            # ui2.tableWidget.setItem(index_row,index_cow,QtWidgets.QTableWidgetItem(x[index_obj]))
+            # index_cow+=1
+            # index_obj+=1
+            # print(x)
 
         # ui2.tableWidget.setRowCount(2)
         # ui2.tableWidget.setColumnCount(3)
@@ -74,19 +78,11 @@ class Ui_Main_window(object):
         app2.show()
         app2.exec_()
 
-
-
-
-
-
-
     def doctors_(self):
         pass
 
-
     def clients_(self):
         pass
-
 
     def zapis_(self):
         pass
@@ -94,10 +90,10 @@ class Ui_Main_window(object):
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     Main_window = QtWidgets.QDialog()
     ui = Ui_Main_window()
     ui.setupUi(Main_window)
     Main_window.show()
     sys.exit(app.exec_())
-
