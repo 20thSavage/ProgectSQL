@@ -138,11 +138,11 @@ def comeback_table():
     all_dicts.append(dict_client)
     return all_dicts
 
-def add_zapis(id):
+def add_z(id):
     with con:
         try:
             add = "INSERT INTO ORDERS (employer,service,client,time) values(?,?,?,CURRENT_TIMESTAMP)"
-            data = (add,id)
+            con.execute (add,id)
             return True
         except Exception as err:
             return err

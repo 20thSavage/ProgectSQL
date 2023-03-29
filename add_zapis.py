@@ -10,7 +10,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from FUNCTION import comeback_table
-from FUNCTION import add_zapis
+from FUNCTION import add_z
 from sucsessful_wndw import Ui_Sucsessful_windw
 from error_wndw import Ui_Error_windw
 
@@ -61,6 +61,7 @@ class Ui_Zapis(object):
         self.Confirm_zapis.clicked.connect(self.zapis)
         l = [self.comboBox_service, self.comboBox_doctors, self.comboBox_clients]
         main_l = comeback_table()
+        print(main_l)
         dict_servis = main_l[0]
         dict_doctors = main_l[1]
         dict_clients = main_l[2]
@@ -72,11 +73,13 @@ class Ui_Zapis(object):
             self.comboBox_clients.addItem(v)
 
     def zapis(self):
+        answer = []
+        print(answer)
         self.comboBox_clients.lineEdit().setReadOnly(True)
         self.comboBox_service.lineEdit().setReadOnly(True)
         self.comboBox_doctors.lineEdit().setReadOnly(True)
 
-        answer = []
+
 
         main_l = comeback_table()
         dict_servis = main_l[0]
@@ -93,8 +96,8 @@ class Ui_Zapis(object):
                 answer.append(k)
 
         answer = tuple(answer)
-
-        ans = add_zapis(answer)
+        print(answer)
+        ans = add_z(answer)
         if ans == True:
             sucsess = QtWidgets.QDialog()
             ui2 = Ui_Sucsessful_windw()

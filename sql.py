@@ -52,6 +52,7 @@ with con:
     con.execute("INSERT INTO ORDERS (client,service,employer,time) values(?,?,?,CURRENT_TIMESTAMP)",(0,0,0))
 
 
+
 with con:
     data = con.execute("SELECT * FROM EMPLOYERS,POSITION,SERVICE,CLIENT_BASE,ORDERS")
     print(data)

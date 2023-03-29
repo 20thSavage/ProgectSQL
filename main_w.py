@@ -12,6 +12,8 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from list_w import Ui_list
 from FUNCTION import return_table
 
+name_cols = ['id','name','price','time']
+
 
 class Ui_Main_window(object):
     def setupUi(self, Main_window):
@@ -50,18 +52,29 @@ class Ui_Main_window(object):
 
 
     def servis_(self):
-        tbl = return_table('SERVICE')
-
-        for x in tbl.fetchall():
-            print(x)
-            print(len(x))
-
-
         app2 = QtWidgets.QDialog()
         ui2 = Ui_list()
         ui2.setupUi(app2)
+        tbl = return_table('SERVICE')
+        ui2.tableWidget.setColumnCount(len(name_cols))
+        ui2.tableWidget.setRowCount(len(tbl.fetchall()))
+        ui2.tableWidget.setHorizontalHeaderLabels(name_cols)
+
+        print(tbl.fetchall())
+
+
+
+
+
+
+
+        # ui2.tableWidget.setRowCount(2)
+        # ui2.tableWidget.setColumnCount(3)
+        # ui2.tableWidget.setHorizontalHeaderLabels(["Name", "Hex Code", "Color"])
         app2.show()
         app2.exec_()
+
+
 
 
 
