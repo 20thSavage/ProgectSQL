@@ -44,11 +44,15 @@ class Ui_list(object):
         self.change_btn.setText(_translate("list", "Изменить существующее"))
         self.del_btn.setText(_translate("list", "Удалить запись"))
 
+        self.Add_btn.clicked.connect(self.ttt)
 
-
+    def ttt(self):
+        for item in self.tableWidget.selectedItems():
+            print(item.text())
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     list = QtWidgets.QDialog()
     ui = Ui_list()
