@@ -73,7 +73,7 @@ class Ui_Add_doctor(object):
         self.Confirm_add_doctor.clicked.connect(self.add_doctor)
 
         poz = return_table('POSITION')
-        for x in poz.fetchall():
+        for x in poz[0].fetchall():
             self.comboBox.addItem(x[1])
 
 
@@ -105,7 +105,7 @@ class Ui_Add_doctor(object):
         answer = []
         poz = return_table('POSITION')
         poz_dict = {}
-        for x in poz.fetchall():
+        for x in poz[0].fetchall():
             poz_dict.update({x[0]:x[1]})
 
         name = any(x.isdigit() for x in self.lineEdit.text())

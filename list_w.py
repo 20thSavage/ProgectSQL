@@ -9,15 +9,11 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from FUNCTION import return_table
 from add_service import Ui_Add_servis
 from add_client import Ui_Add_client
 from add_doctor import Ui_Add_doctor
 from add_zapis import Ui_Zapis
-
-names_servis = ['id', 'name', 'price', 'time']
-names_doctors = ['id', 'name', 'year', 'phone', 'position']
-names_clients = ['id', 'name', 'age', 'phone']
-names_zapis = ['id', 'client', 'servis', 'doctor', 'time']
 
 
 class Ui_list(object):
@@ -54,25 +50,31 @@ class Ui_list(object):
         self.del_btn.setText(_translate("list", "Удалить запись"))
 
         self.Add_btn.clicked.connect(self.add_new)
-        self.del_btn.clicked.connect(self.check)
 
     def check(self, listt):
-        if listt == names_servis:
+        names_servis = return_table('SERVICE')
+        if listt == names_servis[1]:
             return 'Servis'
-        if listt == names_zapis:
+        names_zapis = return_table('ORDERS')
+        if listt == names_zapis[1]:
             return 'Zapis'
-        if listt == names_doctors:
+        names_doctors = return_table('EMPLOYERS')
+        if listt == names_doctors[1]:
             return 'Doctors'
-        if listt == names_clients:
+        names_clients = return_table('CLIENT_BASE')
+        if listt == names_clients[1]:
             return 'Clients'
 
     def add_new(self):
+        print('im here')
         names_col = []
 
         for x in range(0, self.tableWidget.columnCount()):
+            print(x)
             add = self.tableWidget.horizontalHeaderItem(x)
             names_col.append(add.text())
         answ = self.check(names_col)
+        print(answ)
         if answ == 'Servis':
             app2 = QtWidgets.QDialog()
             ui2 = Ui_Add_servis()
@@ -86,6 +88,7 @@ class Ui_list(object):
             app2.show()
             app2.exec_()
         elif answ == 'Doctors':
+            print('here')
             app2 = QtWidgets.QDialog()
             ui2 = Ui_Add_doctor()
             ui2.setupUi(app2)

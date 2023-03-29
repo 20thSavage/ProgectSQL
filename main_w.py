@@ -49,50 +49,46 @@ class Ui_Main_window(object):
         self.zapis.clicked.connect(self.zapis_)
 
     def servis_(self):
-        name_cols = ['id', 'name', 'price', 'time']
         tbl = return_table('SERVICE')
+
         app2 = QtWidgets.QDialog()
         ui2 = Ui_list()
         ui2.setupUi(app2)
-        ui2.tableWidget.setColumnCount(len(name_cols))
-        ui2.tableWidget.setRowCount(len(tbl.fetchall()))
-        ui2.tableWidget.setHorizontalHeaderLabels(name_cols)
+        ui2.tableWidget.setColumnCount(len(tbl[1]))
+        tbl = return_table('SERVICE')
+        ui2.tableWidget.setRowCount(len(tbl[0].fetchall()))
+        tbl = return_table('SERVICE')
+        ui2.tableWidget.setHorizontalHeaderLabels(tbl[1])
         tbl = return_table('SERVICE')
 
         index_row = 0
 
-        for tuuple in tbl.fetchall():
+        for tuuple in tbl[0].fetchall():
             index_cow = 0
             for obj in tuuple:
                 ui2.tableWidget.setItem(index_row, index_cow, QtWidgets.QTableWidgetItem(str(obj)))
                 index_cow += 1
             index_row += 1
 
-            # ui2.tableWidget.setItem(index_row,index_cow,QtWidgets.QTableWidgetItem(x[index_obj]))
-            # index_cow+=1
-            # index_obj+=1
-            # print(x)
-
-        # ui2.tableWidget.setRowCount(2)
-        # ui2.tableWidget.setColumnCount(3)
-        # ui2.tableWidget.setHorizontalHeaderLabels(["Name", "Hex Code", "Color"])
         app2.show()
         app2.exec_()
 
     def doctors_(self):
-        name_cols = ['id', 'name', 'year', 'phone','position']
         tbl = return_table('EMPLOYERS')
+
         app2 = QtWidgets.QDialog()
         ui2 = Ui_list()
         ui2.setupUi(app2)
-        ui2.tableWidget.setColumnCount(len(name_cols))
-        ui2.tableWidget.setRowCount(len(tbl.fetchall()))
-        ui2.tableWidget.setHorizontalHeaderLabels(name_cols)
+        ui2.tableWidget.setColumnCount(len(tbl[1]))
+        tbl = return_table('EMPLOYERS')
+        ui2.tableWidget.setRowCount(len(tbl[0].fetchall()))
+        tbl = return_table('EMPLOYERS')
+        ui2.tableWidget.setHorizontalHeaderLabels(tbl[1])
         tbl = return_table('EMPLOYERS')
 
         index_row = 0
 
-        for tuuple in tbl.fetchall():
+        for tuuple in tbl[0].fetchall():
             index_cow = 0
             for obj in tuuple:
                 ui2.tableWidget.setItem(index_row, index_cow, QtWidgets.QTableWidgetItem(str(obj)))
@@ -103,19 +99,21 @@ class Ui_Main_window(object):
         app2.exec_()
 
     def clients_(self):
-        name_cols = ['id', 'name', 'age', 'phone']
         tbl = return_table('CLIENT_BASE')
+
         app2 = QtWidgets.QDialog()
         ui2 = Ui_list()
         ui2.setupUi(app2)
-        ui2.tableWidget.setColumnCount(len(name_cols))
-        ui2.tableWidget.setRowCount(len(tbl.fetchall()))
-        ui2.tableWidget.setHorizontalHeaderLabels(name_cols)
+        ui2.tableWidget.setColumnCount(len(tbl[1]))
+        tbl = return_table('CLIENT_BASE')
+        ui2.tableWidget.setRowCount(len(tbl[0].fetchall()))
+        tbl = return_table('CLIENT_BASE')
+        ui2.tableWidget.setHorizontalHeaderLabels(tbl[1])
         tbl = return_table('CLIENT_BASE')
 
         index_row = 0
 
-        for tuuple in tbl.fetchall():
+        for tuuple in tbl[0].fetchall():
             index_cow = 0
             for obj in tuuple:
                 ui2.tableWidget.setItem(index_row, index_cow, QtWidgets.QTableWidgetItem(str(obj)))
@@ -126,19 +124,21 @@ class Ui_Main_window(object):
         app2.exec_()
 
     def zapis_(self):
-        name_cols = ['id', 'client', 'servis', 'doctor','time']
         tbl = return_table('ORDERS')
+
         app2 = QtWidgets.QDialog()
         ui2 = Ui_list()
         ui2.setupUi(app2)
-        ui2.tableWidget.setColumnCount(len(name_cols))
-        ui2.tableWidget.setRowCount(len(tbl.fetchall()))
-        ui2.tableWidget.setHorizontalHeaderLabels(name_cols)
+        ui2.tableWidget.setColumnCount(len(tbl[1]))
+        tbl = return_table('ORDERS')
+        ui2.tableWidget.setRowCount(len(tbl[0].fetchall()))
+        tbl = return_table('ORDERS')
+        ui2.tableWidget.setHorizontalHeaderLabels(tbl[1])
         tbl = return_table('ORDERS')
 
         index_row = 0
 
-        for tuuple in tbl.fetchall():
+        for tuuple in tbl[0].fetchall():
             index_cow = 0
             for obj in tuuple:
                 ui2.tableWidget.setItem(index_row, index_cow, QtWidgets.QTableWidgetItem(str(obj)))

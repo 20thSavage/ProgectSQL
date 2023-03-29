@@ -94,9 +94,9 @@ class Ui_Zapis(object):
         for k, v in dict_clients.items():
             if v == self.comboBox_clients.lineEdit().text():
                 answer.append(k)
-
-        answer = tuple(answer)
         print(answer)
+        answer = tuple(answer)
+
         ans = add_z(answer)
         if ans == True:
             sucsess = QtWidgets.QDialog()
@@ -104,7 +104,6 @@ class Ui_Zapis(object):
             ui2.setupUi(sucsess)
             sucsess.show()
             sucsess.exec_()
-            Zapis.close()
         else:
             print(ans)
             error = QtWidgets.QDialog()

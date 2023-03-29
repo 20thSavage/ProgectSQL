@@ -159,7 +159,7 @@ def comeback_table():
     return all_dicts
 
 
-def record (id):
+def add_z (id):
     with con:
         try:
             add = "INSERT OR IGNORE INTO ORDERS (client,service,employer) values(?,?,?)"
