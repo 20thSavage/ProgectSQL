@@ -13,6 +13,7 @@ from FUNCTION import add_service
 from sucsessful_wndw import Ui_Sucsessful_windw
 from error_wndw import Ui_Error_windw
 
+
 class Ui_Add_servis(object):
     def setupUi(self, Add_servis):
         Add_servis.setObjectName("Add_servis")
@@ -79,7 +80,6 @@ class Ui_Add_servis(object):
                             ui2.setupUi(sucsess)
                             sucsess.show()
                             sucsess.exec_()
-                            Add_servis.close()
                         else:
                             error = QtWidgets.QDialog()
                             ui2 = Ui_Error_windw()

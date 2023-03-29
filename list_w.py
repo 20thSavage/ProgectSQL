@@ -9,6 +9,15 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from add_service import Ui_Add_servis
+from add_client import Ui_Add_client
+from add_doctor import Ui_Add_doctor
+from add_zapis import Ui_Zapis
+
+names_servis = ['id', 'name', 'price', 'time']
+names_doctors = ['id', 'name', 'year', 'phone', 'position']
+names_clients = ['id', 'name', 'age', 'phone']
+names_zapis = ['id', 'client', 'servis', 'doctor', 'time']
 
 
 class Ui_list(object):
@@ -44,11 +53,51 @@ class Ui_list(object):
         self.change_btn.setText(_translate("list", "Изменить существующее"))
         self.del_btn.setText(_translate("list", "Удалить запись"))
 
-        self.Add_btn.clicked.connect(self.ttt)
+        self.Add_btn.clicked.connect(self.add_new)
+        self.del_btn.clicked.connect(self.check)
 
-    def ttt(self):
-        for item in self.tableWidget.selectedItems():
-            print(item.text())
+    def check(self, listt):
+        if listt == names_servis:
+            return 'Servis'
+        if listt == names_zapis:
+            return 'Zapis'
+        if listt == names_doctors:
+            return 'Doctors'
+        if listt == names_clients:
+            return 'Clients'
+
+    def add_new(self):
+        names_col = []
+
+        for x in range(0, self.tableWidget.columnCount()):
+            add = self.tableWidget.horizontalHeaderItem(x)
+            names_col.append(add.text())
+        answ = self.check(names_col)
+        if answ == 'Servis':
+            app2 = QtWidgets.QDialog()
+            ui2 = Ui_Add_servis()
+            ui2.setupUi(app2)
+            app2.show()
+            app2.exec_()
+        elif answ == 'Clients':
+            app2 = QtWidgets.QDialog()
+            ui2 = Ui_Add_client()
+            ui2.setupUi(app2)
+            app2.show()
+            app2.exec_()
+        elif answ == 'Doctors':
+            app2 = QtWidgets.QDialog()
+            ui2 = Ui_Add_doctor()
+            ui2.setupUi(app2)
+            app2.show()
+            app2.exec_()
+        elif answ == 'Zapis':
+            app2 = QtWidgets.QDialog()
+            ui2 = Ui_Zapis()
+            ui2.setupUi(app2)
+            app2.show()
+            app2.exec_()
+
 
 if __name__ == "__main__":
     import sys

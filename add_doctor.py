@@ -134,7 +134,7 @@ class Ui_Add_doctor(object):
                             ui2.setupUi(sucsess)
                             sucsess.show()
                             sucsess.exec_()
-                            Add_doctor.close()
+
                         else:
                             print(result)
                             error = QtWidgets.QDialog()
