@@ -129,8 +129,8 @@ class Ui_list(object):
             names_col = []
 
             for x in range(0, self.tableWidget.columnCount()):
-                add = self.tableWidget.horizontalHeaderItem(x)
-                names_col.append(add.text())
+                item = self.tableWidget.horizontalHeaderItem(x)
+                names_col.append(item.text())
 
             res = change_table(self.check(names_col), items[0].text(), korteg)
 

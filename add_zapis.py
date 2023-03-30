@@ -83,11 +83,10 @@ class Ui_Zapis(object):
         self.comboBox_clients.lineEdit().setReadOnly(True)
         self.comboBox_service.lineEdit().setReadOnly(True)
         self.comboBox_doctors.lineEdit().setReadOnly(True)
+        main_l = comeback_table()
         answer = []
-        print(answer)
 
         l = [self.comboBox_service, self.comboBox_doctors, self.comboBox_clients]
-        main_l = comeback_table()
 
         index = 0
         for x in main_l:
