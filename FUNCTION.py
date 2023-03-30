@@ -2,7 +2,7 @@ import sqlite3
 
 con = sqlite3.connect('server.db', check_same_thread=False)
 
-
+#НУЖНА ФУНКЦИЯ УДАЛЕНИЯ. ОНА ПРИНИМАЕТ ID
 def add_new_client(data):
     with con:
         try:
@@ -158,7 +158,7 @@ def comeback_table():
     all_dicts.append(dict_client)
     return all_dicts
 
-
+#НЕ МЕНЯЙ НАЗВАНИЯ!
 def add_z (id):
     with con:
         try:

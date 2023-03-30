@@ -164,9 +164,15 @@ class Ui_list(object):
         self.del_btn.setDisabled(True)
 
         items = self.tableWidget.selectedItems()
-        print(len(items))
         if items != [] and len(items) >= 4:
             id = items[0].text()
+            names_col = []
+
+            for x in range(0, self.tableWidget.columnCount()):
+                add = self.tableWidget.horizontalHeaderItem(x)
+                names_col.append(add.text())
+            tbl_name = self.check(names_col)
+            print(id,tbl_name)
         else:
             self.Add_btn.setDisabled(False)
             self.change_btn.setDisabled(False)
