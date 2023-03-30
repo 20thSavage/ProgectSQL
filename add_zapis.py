@@ -61,16 +61,22 @@ class Ui_Zapis(object):
         self.Confirm_zapis.clicked.connect(self.zapis)
         l = [self.comboBox_service, self.comboBox_doctors, self.comboBox_clients]
         main_l = comeback_table()
-        print(main_l)
-        dict_servis = main_l[0]
-        dict_doctors = main_l[1]
-        dict_clients = main_l[2]
-        for k, v in dict_servis.items():
-            self.comboBox_service.addItem(v)
-        for k, v in dict_doctors.items():
-            self.comboBox_doctors.addItem(v)
-        for k, v in dict_clients.items():
-            self.comboBox_clients.addItem(v)
+        # print(main_l)
+        index = 0
+        for x in main_l:
+            for k, v in x.items():
+                l[index].addItem(v)
+            index += 1
+
+        # dict_servis = main_l[0]
+        # dict_doctors = main_l[1]
+        # dict_clients = main_l[2]
+        # for k, v in dict_servis.items():
+        #     self.comboBox_service.addItem(v)
+        # for k, v in dict_doctors.items():
+        #     self.comboBox_doctors.addItem(v)
+        # for k, v in dict_clients.items():
+        #     self.comboBox_clients.addItem(v)
 
     def zapis(self):
         answer = []
@@ -79,21 +85,28 @@ class Ui_Zapis(object):
         self.comboBox_service.lineEdit().setReadOnly(True)
         self.comboBox_doctors.lineEdit().setReadOnly(True)
 
-
-
+        l = [self.comboBox_service, self.comboBox_doctors, self.comboBox_clients]
         main_l = comeback_table()
-        dict_servis = main_l[0]
-        dict_doctors = main_l[1]
-        dict_clients = main_l[2]
-        for k, v in dict_doctors.items():
-            if v == self.comboBox_doctors.lineEdit().text():
-                answer.append(k)
-        for k, v in dict_servis.items():
-            if v == self.comboBox_service.lineEdit().text():
-                answer.append(k)
-        for k, v in dict_clients.items():
-            if v == self.comboBox_clients.lineEdit().text():
-                answer.append(k)
+
+        index = 0
+        for x in main_l:
+            for k, v in x.items():
+                if v == l[index].lineEdit().text():
+                    answer.append(k)
+            index += 1
+
+        # dict_servis = main_l[0]
+        # dict_doctors = main_l[1]
+        # dict_clients = main_l[2]
+        # for k, v in dict_doctors.items():
+        #     if v == self.comboBox_doctors.lineEdit().text():
+        #         answer.append(k)
+        # for k, v in dict_servis.items():
+        #     if v == self.comboBox_service.lineEdit().text():
+        #         answer.append(k)
+        # for k, v in dict_clients.items():
+        #     if v == self.comboBox_clients.lineEdit().text():
+        #         answer.append(k)
         print(answer)
         answer = tuple(answer)
 

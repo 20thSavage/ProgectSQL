@@ -116,6 +116,9 @@ class Ui_Add_client(object):
             self.label_error_name_client.setText('В имени не бывает цифр!')
 
 
+
+
+
 if __name__ == "__main__":
     import sys
 
