@@ -92,7 +92,7 @@ def change_table(name, ids, kort):
         if name == 'EMPLOYERS':
             try:
                 cursor = con.cursor()
-                update = "UPDATE EMPLOYERS SET name,year,phone_num,position=(?,?,?,?) WHERE id=?"
+                update = "UPDATE EMPLOYERS SET name=?,year=?,phone_num=?,position=? WHERE id=?"
                 data = (kort, ids)
                 cursor.execute(update, data)
                 con.commit()
@@ -103,7 +103,7 @@ def change_table(name, ids, kort):
         if name == 'CLIENT_BASE':
             try:
                 cursor = con.cursor()
-                update = "UPDATE CLIENT_BASE SET name,age,phone_num=(?,?,?) WHERE id=?"
+                update = "UPDATE CLIENT_BASE SET name=?,age=?,phone_num=? WHERE id=?"
                 data = (kort, ids)
                 cursor.execute(update, data)
                 con.commit()
@@ -114,7 +114,7 @@ def change_table(name, ids, kort):
         if name == 'POSITION':
             try:
                 cursor = con.cursor()
-                update = "UPDATE POSITION SET name,salary,service=(?,?,?) WHERE id=?"
+                update = "UPDATE POSITION SET name=?,salary=?,service=? WHERE id=?"
                 data = (kort, ids)
                 cursor.execute(update, data)
                 con.commit()
@@ -125,7 +125,7 @@ def change_table(name, ids, kort):
         if name == 'SERVICE':
             try:
                 cursor = con.cursor()
-                update = "UPDATE SERVICE SET name,price,time=(?,?,?) WHERE id=?"
+                update = "UPDATE SERVICE SET name=?,price=?,time=? WHERE id=?"
                 data = (kort, ids)
                 cursor.execute(update, data)
                 con.commit()
@@ -167,6 +167,7 @@ def add_z (id):
             return True
         except Exception as err:
             return err
+
 
 
 
