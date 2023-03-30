@@ -123,7 +123,6 @@ class Ui_list(object):
 
             korteg = []
             for x in range(1, len(items)):
-                print(items[x].text())
                 korteg.append(items[x].text())
             korteg = tuple(korteg)
 

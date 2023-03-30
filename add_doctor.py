@@ -114,6 +114,7 @@ class Ui_Add_doctor(object):
             if self.check_phone_num() == True:
                 if self.dateEdit.text() != '01.01.2000':
                     if self.comboBox.lineEdit().text() != '':
+                        self.Confirm_add_doctor.setDisabled(True)
                         self.lineEdit.setReadOnly(True)
                         self.lineEdit_phone_num_doctor.setReadOnly(True)
                         self.dateEdit.setReadOnly(True)
@@ -134,6 +135,12 @@ class Ui_Add_doctor(object):
                             ui2.setupUi(sucsess)
                             sucsess.show()
                             sucsess.exec_()
+
+                            self.Confirm_add_doctor.setDisabled(False)
+                            self.lineEdit.setReadOnly(False)
+                            self.lineEdit_phone_num_doctor.setReadOnly(False)
+                            self.dateEdit.setReadOnly(False)
+                            self.comboBox.lineEdit().setReadOnly(False)
 
                         else:
                             print(result)

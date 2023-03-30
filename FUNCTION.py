@@ -2,7 +2,7 @@ import sqlite3
 
 con = sqlite3.connect('server.db', check_same_thread=False)
 
-#НУЖНА ФУНКЦИЯ УДАЛЕНИЯ. ОНА ПРИНИМАЕТ ID
+
 def add_new_client(data):
     with con:
         try:

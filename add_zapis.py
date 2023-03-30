@@ -79,11 +79,12 @@ class Ui_Zapis(object):
         #     self.comboBox_clients.addItem(v)
 
     def zapis(self):
-        answer = []
-        print(answer)
+        self.Confirm_zapis.setDisabled(True)
         self.comboBox_clients.lineEdit().setReadOnly(True)
         self.comboBox_service.lineEdit().setReadOnly(True)
         self.comboBox_doctors.lineEdit().setReadOnly(True)
+        answer = []
+        print(answer)
 
         l = [self.comboBox_service, self.comboBox_doctors, self.comboBox_clients]
         main_l = comeback_table()
@@ -117,6 +118,11 @@ class Ui_Zapis(object):
             ui2.setupUi(sucsess)
             sucsess.show()
             sucsess.exec_()
+
+            self.Confirm_zapis.setDisabled(False)
+            self.comboBox_clients.lineEdit().setReadOnly(False)
+            self.comboBox_service.lineEdit().setReadOnly(False)
+            self.comboBox_doctors.lineEdit().setReadOnly(False)
         else:
             print(ans)
             error = QtWidgets.QDialog()

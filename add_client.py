@@ -88,16 +88,16 @@ class Ui_Add_client(object):
             return False
 
     def add_client(self):
+        self.lineEdit_name_client.setReadOnly(True)
+        self.lineEdit_phone_num_client.setReadOnly(True)
+        self.dateEdit.setReadOnly(True)
+        self.pushButton.setDisabled(True)
         name = any(x.isdigit() for x in self.lineEdit_name_client.text())
         if name == False:
             self.label_error_name_client.setText('')
             if self.check_phone_num() == True:
-                self.lineEdit_name_client.setReadOnly(True)
-                self.lineEdit_phone_num_client.setReadOnly(True)
-                self.dateEdit.setReadOnly(True)
                 result = (
                     self.lineEdit_name_client.text(), self.dateEdit.text(), self.lineEdit_phone_num_client.text())
-                # print(result)
                 answer = add_new_client(result)
                 if answer == True:
                     sucsess = QtWidgets.QDialog()
@@ -106,14 +106,29 @@ class Ui_Add_client(object):
                     sucsess.show()
                     sucsess.exec_()
 
+                    self.pushButton.setDisabled(False)
+                    self.lineEdit_name_client.setReadOnly(False)
+                    self.lineEdit_phone_num_client.setReadOnly(False)
+                    self.dateEdit.setReadOnly(False)
+
                 else:
+                    print(answer)
                     error = QtWidgets.QDialog()
                     ui2 = Ui_Error_windw()
                     ui2.setupUi(error)
                     error.show()
                     error.exec_()
+            else:
+                self.pushButton.setDisabled(False)
+                self.lineEdit_name_client.setReadOnly(False)
+                self.lineEdit_phone_num_client.setReadOnly(False)
+                self.dateEdit.setReadOnly(False)
         else:
             self.label_error_name_client.setText('В имени не бывает цифр!')
+            self.pushButton.setDisabled(False)
+            self.lineEdit_name_client.setReadOnly(False)
+            self.lineEdit_phone_num_client.setReadOnly(False)
+            self.dateEdit.setReadOnly(False)
 
 
 
