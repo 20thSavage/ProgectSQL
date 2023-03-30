@@ -103,7 +103,7 @@ def change_table(name, ids, kort):
         if name == 'CLIENT_BASE':
             try:
                 cursor = con.cursor()
-                update = "UPDATE CLIENT_BASE SET name,age,phone_num=?,?,?, WHERE id=?"
+                update = "UPDATE CLIENT_BASE SET name,age,phone_num=?,?,? WHERE id=?"
                 data = (kort, ids)
                 cursor.execute(update, data)
                 con.commit()
