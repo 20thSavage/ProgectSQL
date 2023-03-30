@@ -93,7 +93,7 @@ def change_table(name, ids, kort):
             try:
                 cursor = con.cursor()
                 update = "UPDATE EMPLOYERS SET name=?,year=?,phone_num=?,position=? WHERE id=?"
-                data = (kort, ids)
+                data = list(kort).append(ids)
                 cursor.execute(update, data)
                 con.commit()
                 cursor.close()
@@ -104,18 +104,18 @@ def change_table(name, ids, kort):
             try:
                 cursor = con.cursor()
                 update = "UPDATE CLIENT_BASE SET name=?,age=?,phone_num=? WHERE id=?"
-                data = (kort, ids)
+                data = list(kort).append(ids)
                 cursor.execute(update, data)
                 con.commit()
                 cursor.close()
                 return True
             except Exception as erradd:
                 return erradd
-        if name == 'POSITION':
+        if name == 'ORDERS':
             try:
                 cursor = con.cursor()
-                update = "UPDATE POSITION SET name=?,salary=?,service=? WHERE id=?"
-                data = (kort, ids)
+                update = "UPDATE ORDERS SET client=?,service=?,employer=? WHERE id=?"
+                data = list(kort).append(ids)
                 cursor.execute(update, data)
                 con.commit()
                 cursor.close()
@@ -126,7 +126,7 @@ def change_table(name, ids, kort):
             try:
                 cursor = con.cursor()
                 update = "UPDATE SERVICE SET name=?,price=?,time=? WHERE id=?"
-                data = (kort, ids)
+                data = list(kort).append(ids)
                 cursor.execute(update, data)
                 con.commit()
                 cursor.close()
