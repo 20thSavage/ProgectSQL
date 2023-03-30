@@ -68,6 +68,7 @@ class Ui_Add_servis(object):
             if self.Line_edit_price_service.text() != 'Тут только цифры!':
                 if self.Line_edit_price_service.text().isdigit()==True:
                     if self.timeEdit.text() != '0:00':
+                        self.Confirm_add_servis.setDisabled(True)
                         self.lineEdit.setReadOnly(True)
                         self.Line_edit_price_service.setReadOnly(True)
                         self.timeEdit.setReadOnly(True)
@@ -80,7 +81,13 @@ class Ui_Add_servis(object):
                             ui2.setupUi(sucsess)
                             sucsess.show()
                             sucsess.exec_()
+
+                            self.Confirm_add_servis.setDisabled(False)
+                            self.lineEdit.setReadOnly(False)
+                            self.Line_edit_price_service.setReadOnly(False)
+                            self.timeEdit.setReadOnly(False)
                         else:
+                            print(answ)
                             error = QtWidgets.QDialog()
                             ui2 = Ui_Error_windw()
                             ui2.setupUi(error)

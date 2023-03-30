@@ -9,15 +9,14 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from FUNCTION import change_table
+from FUNCTION import return_table
 from add_service import Ui_Add_servis
 from add_client import Ui_Add_client
 from add_doctor import Ui_Add_doctor
 from add_zapis import Ui_Zapis
-
-names_servis = ['id', 'name', 'price', 'time']
-names_doctors = ['id', 'name', 'year', 'phone', 'position']
-names_clients = ['id', 'name', 'age', 'phone']
-names_zapis = ['id', 'client', 'servis', 'doctor', 'time']
+from sucsessful_wndw import Ui_Sucsessful_windw
+from error_wndw import Ui_Error_windw
 
 
 class Ui_list(object):
@@ -54,17 +53,48 @@ class Ui_list(object):
         self.del_btn.setText(_translate("list", "Удалить запись"))
 
         self.Add_btn.clicked.connect(self.add_new)
-        self.del_btn.clicked.connect(self.check)
+        self.change_btn.clicked.connect(self.change_in_db)
+        self.del_btn.clicked.connect(self.dell_from_db)
+
+    def new_window(self, servis=False, doctor=False, client=False, zapis=False):
+        if servis == True:
+            app2 = QtWidgets.QDialog()
+            ui2 = Ui_Add_servis()
+            ui2.setupUi(app2)
+            app2.show()
+            app2.exec_()
+        elif doctor == True:
+            app2 = QtWidgets.QDialog()
+            ui2 = Ui_Add_doctor()
+            ui2.setupUi(app2)
+            app2.show()
+            app2.exec_()
+        elif client == True:
+            app2 = QtWidgets.QDialog()
+            ui2 = Ui_Add_client()
+            ui2.setupUi(app2)
+            app2.show()
+            app2.exec_()
+        elif zapis == True:
+            app2 = QtWidgets.QDialog()
+            ui2 = Ui_Zapis()
+            ui2.setupUi(app2)
+            app2.show()
+            app2.exec_()
 
     def check(self, listt):
-        if listt == names_servis:
-            return 'Servis'
-        if listt == names_zapis:
-            return 'Zapis'
-        if listt == names_doctors:
-            return 'Doctors'
-        if listt == names_clients:
-            return 'Clients'
+        names_servis = return_table('SERVICE')
+        if listt == names_servis[1]:
+            return 'SERVICE'
+        names_zapis = return_table('ORDERS')
+        if listt == names_zapis[1]:
+            return 'ORDERS'
+        names_doctors = return_table('EMPLOYERS')
+        if listt == names_doctors[1]:
+            return 'EMPLOYERS'
+        names_clients = return_table('CLIENT_BASE')
+        if listt == names_clients[1]:
+            return 'CLIENT_BASE'
 
     def add_new(self):
         names_col = []
@@ -72,31 +102,80 @@ class Ui_list(object):
         for x in range(0, self.tableWidget.columnCount()):
             add = self.tableWidget.horizontalHeaderItem(x)
             names_col.append(add.text())
+
         answ = self.check(names_col)
-        if answ == 'Servis':
-            app2 = QtWidgets.QDialog()
-            ui2 = Ui_Add_servis()
-            ui2.setupUi(app2)
-            app2.show()
-            app2.exec_()
-        elif answ == 'Clients':
-            app2 = QtWidgets.QDialog()
-            ui2 = Ui_Add_client()
-            ui2.setupUi(app2)
-            app2.show()
-            app2.exec_()
-        elif answ == 'Doctors':
-            app2 = QtWidgets.QDialog()
-            ui2 = Ui_Add_doctor()
-            ui2.setupUi(app2)
-            app2.show()
-            app2.exec_()
-        elif answ == 'Zapis':
-            app2 = QtWidgets.QDialog()
-            ui2 = Ui_Zapis()
-            ui2.setupUi(app2)
-            app2.show()
-            app2.exec_()
+
+        if answ == 'SERVICE':
+            self.new_window(servis=True)
+        elif answ == 'CLIENT_BASE':
+            self.new_window(client=True)
+        elif answ == 'EMPLOYERS':
+            self.new_window(doctor=True)
+        elif answ == 'ORDERS':
+            self.new_window(zapis=True)
+
+    def change_in_db(self):
+        self.Add_btn.setDisabled(True)
+        self.change_btn.setDisabled(True)
+        self.del_btn.setDisabled(True)
+        items = self.tableWidget.selectedItems()
+        if items != [] and len(items) >=4:
+
+            korteg = []
+            for x in range(1, len(items)):
+                korteg.append(items[x].text())
+            korteg = tuple(korteg)
+
+            names_col = []
+
+            for x in range(0, self.tableWidget.columnCount()):
+                item = self.tableWidget.horizontalHeaderItem(x)
+                names_col.append(item.text())
+
+            res = change_table(self.check(names_col), items[0].text(), korteg)
+
+            if res == True:
+                sucsess = QtWidgets.QDialog()
+                ui2 = Ui_Sucsessful_windw()
+                ui2.setupUi(sucsess)
+                sucsess.show()
+                sucsess.exec_()
+            else:
+                print(res)
+                error = QtWidgets.QDialog()
+                ui2 = Ui_Error_windw()
+                ui2.setupUi(error)
+                error.show()
+                error.exec_()
+
+                self.Add_btn.setDisabled(False)
+                self.change_btn.setDisabled(False)
+                self.del_btn.setDisabled(False)
+        else:
+            self.Add_btn.setDisabled(False)
+            self.change_btn.setDisabled(False)
+            self.del_btn.setDisabled(False)
+
+
+    def dell_from_db(self):
+        self.Add_btn.setDisabled(True)
+        self.change_btn.setDisabled(True)
+        self.del_btn.setDisabled(True)
+
+        items = self.tableWidget.selectedItems()
+        if items != [] and len(items) >= 4:
+            id = items[0].text()
+            names_col = []
+
+            for x in range(0, self.tableWidget.columnCount()):
+                add = self.tableWidget.horizontalHeaderItem(x)
+                names_col.append(add.text())
+            tbl_name = self.check(names_col)
+            print(id,tbl_name)
+        else:
+            self.Add_btn.setDisabled(False)
+            self.change_btn.setDisabled(False)
+            self.del_btn.setDisabled(False)
 
 
 if __name__ == "__main__":

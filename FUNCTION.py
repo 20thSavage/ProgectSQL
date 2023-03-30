@@ -158,8 +158,8 @@ def comeback_table():
     all_dicts.append(dict_client)
     return all_dicts
 
-
-def record (id):
+#НЕ МЕНЯЙ НАЗВАНИЯ!
+def add_z (id):
     with con:
         try:
             add = "INSERT OR IGNORE INTO ORDERS (client,service,employer) values(?,?,?)"
