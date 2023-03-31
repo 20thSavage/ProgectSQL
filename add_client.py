@@ -105,12 +105,6 @@ class Ui_Add_client(object):
                     ui2.setupUi(sucsess)
                     sucsess.show()
                     sucsess.exec_()
-
-                    self.pushButton.setDisabled(False)
-                    self.lineEdit_name_client.setReadOnly(False)
-                    self.lineEdit_phone_num_client.setReadOnly(False)
-                    self.dateEdit.setReadOnly(False)
-
                 else:
                     print(answer)
                     error = QtWidgets.QDialog()
@@ -118,6 +112,11 @@ class Ui_Add_client(object):
                     ui2.setupUi(error)
                     error.show()
                     error.exec_()
+
+                    self.pushButton.setDisabled(False)
+                    self.lineEdit_name_client.setReadOnly(False)
+                    self.lineEdit_phone_num_client.setReadOnly(False)
+                    self.dateEdit.setReadOnly(False)
             else:
                 self.pushButton.setDisabled(False)
                 self.lineEdit_name_client.setReadOnly(False)
@@ -129,9 +128,6 @@ class Ui_Add_client(object):
             self.lineEdit_name_client.setReadOnly(False)
             self.lineEdit_phone_num_client.setReadOnly(False)
             self.dateEdit.setReadOnly(False)
-
-
-
 
 
 if __name__ == "__main__":

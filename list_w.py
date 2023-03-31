@@ -11,6 +11,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from FUNCTION import change_table
 from FUNCTION import return_table
+from FUNCTION import del_
 from add_service import Ui_Add_servis
 from add_client import Ui_Add_client
 from add_doctor import Ui_Add_doctor
@@ -119,43 +120,57 @@ class Ui_list(object):
         self.change_btn.setDisabled(True)
         self.del_btn.setDisabled(True)
         items = self.tableWidget.selectedItems()
-        if items != [] and len(items) >=4:
+        if items != [] and len(items) >= 4:
 
             korteg = []
             for x in range(1, len(items)):
                 korteg.append(items[x].text())
+            korteg[2] = int(korteg[2])
+            korteg[3] = int(korteg[3])
+
             korteg = tuple(korteg)
+            id = int(items[0].text())
 
             names_col = []
 
             for x in range(0, self.tableWidget.columnCount()):
                 item = self.tableWidget.horizontalHeaderItem(x)
                 names_col.append(item.text())
+            print(f"{self.check(names_col)}  {type(self.check(names_col))}\n"
+                  f"{id} {type(id)}\n"
+                  f"{korteg[0]}  {type(korteg[0])}\n"
+                  f"{korteg[1]}  {type(korteg[1])}\n"
+                  f"{korteg[2]}  {type(korteg[2])}\n"
+                  f"{korteg[3]}  {type(korteg[3])}")
 
-            res = change_table(self.check(names_col), items[0].text(), korteg)
+            # res = change_table(self.check(names_col),id,korteg)
 
-            if res == True:
-                sucsess = QtWidgets.QDialog()
-                ui2 = Ui_Sucsessful_windw()
-                ui2.setupUi(sucsess)
-                sucsess.show()
-                sucsess.exec_()
-            else:
-                print(res)
-                error = QtWidgets.QDialog()
-                ui2 = Ui_Error_windw()
-                ui2.setupUi(error)
-                error.show()
-                error.exec_()
 
-                self.Add_btn.setDisabled(False)
-                self.change_btn.setDisabled(False)
-                self.del_btn.setDisabled(False)
+
+            # parameters are of unsupported type
+
+            # if res == True:
+            #     sucsess = QtWidgets.QDialog()
+            #     ui2 = Ui_Sucsessful_windw()
+            #     ui2.setupUi(sucsess)
+            #     sucsess.show()
+            #     sucsess.exec_()
+            #
+            # else:
+            #     print(res)
+            #     error = QtWidgets.QDialog()
+            #     ui2 = Ui_Error_windw()
+            #     ui2.setupUi(error)
+            #     error.show()
+            #     error.exec_()
+            #
+            #     self.Add_btn.setDisabled(False)
+            #     self.change_btn.setDisabled(False)
+            #     self.del_btn.setDisabled(False)
         else:
             self.Add_btn.setDisabled(False)
             self.change_btn.setDisabled(False)
             self.del_btn.setDisabled(False)
-
 
     def dell_from_db(self):
         self.Add_btn.setDisabled(True)
@@ -165,13 +180,36 @@ class Ui_list(object):
         items = self.tableWidget.selectedItems()
         if items != [] and len(items) >= 4:
             id = items[0].text()
+            id = int(id)
+            print(id)
+            print(type(id))
             names_col = []
 
             for x in range(0, self.tableWidget.columnCount()):
                 add = self.tableWidget.horizontalHeaderItem(x)
                 names_col.append(add.text())
             tbl_name = self.check(names_col)
-            print(id,tbl_name)
+            answer = del_(tbl_name, id)
+            if answer == True:
+                sucsess = QtWidgets.QDialog()
+                ui2 = Ui_Sucsessful_windw()
+                ui2.setupUi(sucsess)
+                sucsess.show()
+                sucsess.exec_()
+            else:
+                print(answer)
+                error = QtWidgets.QDialog()
+                ui2 = Ui_Error_windw()
+                ui2.setupUi(error)
+                error.show()
+                error.exec_()
+
+                self.Add_btn.setDisabled(False)
+                self.change_btn.setDisabled(False)
+                self.del_btn.setDisabled(False)
+
+
+
         else:
             self.Add_btn.setDisabled(False)
             self.change_btn.setDisabled(False)
