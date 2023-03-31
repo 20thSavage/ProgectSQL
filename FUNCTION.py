@@ -154,7 +154,7 @@ def add_z (id):
     with con:
         try:
             add = "INSERT OR IGNORE INTO ORDERS (client,service,employer) values(?,?,?)"
-            data = (add,id)
+            con.execute(add,id)
             return True
         except Exception as err:
             return err
