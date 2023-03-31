@@ -174,7 +174,7 @@ def del_(table,ids): # запрос нужен в формате table = 'TEXT',
             if table == 'CLIENT_BASE':
                 cursor = con.cursor()
                 delete_id = "DELETE FROM CLIENT_BASE WHERE id = ?"
-                a=cursor.execute(delete_id,(ids, ))
+                cursor.execute(delete_id,(ids, ))
                 con.commit()
                 cursor.close()
                 return True
