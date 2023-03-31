@@ -143,30 +143,32 @@ class Ui_list(object):
                   f"{korteg[2]}  {type(korteg[2])}\n"
                   f"{korteg[3]}  {type(korteg[3])}")
 
-            # res = change_table(self.check(names_col),id,korteg)
+
+            res = change_table(self.check(names_col),id,korteg)
 
 
 
             # parameters are of unsupported type
+            # ("EMPLOYERS"(TEXT),4(int),('Витя'(TEXT),'1982'(TEXT),337474374(BIGINT),3(int))
 
-            # if res == True:
-            #     sucsess = QtWidgets.QDialog()
-            #     ui2 = Ui_Sucsessful_windw()
-            #     ui2.setupUi(sucsess)
-            #     sucsess.show()
-            #     sucsess.exec_()
-            #
-            # else:
-            #     print(res)
-            #     error = QtWidgets.QDialog()
-            #     ui2 = Ui_Error_windw()
-            #     ui2.setupUi(error)
-            #     error.show()
-            #     error.exec_()
-            #
-            #     self.Add_btn.setDisabled(False)
-            #     self.change_btn.setDisabled(False)
-            #     self.del_btn.setDisabled(False)
+            if res == True:
+                sucsess = QtWidgets.QDialog()
+                ui2 = Ui_Sucsessful_windw()
+                ui2.setupUi(sucsess)
+                sucsess.show()
+                sucsess.exec_()
+
+            else:
+                print(res)
+                error = QtWidgets.QDialog()
+                ui2 = Ui_Error_windw()
+                ui2.setupUi(error)
+                error.show()
+                error.exec_()
+
+                self.Add_btn.setDisabled(False)
+                self.change_btn.setDisabled(False)
+                self.del_btn.setDisabled(False)
         else:
             self.Add_btn.setDisabled(False)
             self.change_btn.setDisabled(False)

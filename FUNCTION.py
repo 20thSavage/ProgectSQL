@@ -91,13 +91,10 @@ def change_table(name, ids, kort): # получает name = 'TEXT' ids = intege
     with con:
         if name == 'EMPLOYERS':
             try:
-                cursor = con.cursor()
-                update = "UPDATE EMPLOYERS SET name=?,year=?,phone_num=?,position=? WHERE id=?" # ("EMPLOYERS"(TEXT),4(int),('Витя'(TEXT),'1982'(TEXT),337474374(BIGINT),3(int))
-                data = list(kort).append(ids)
-                cursor.execute(update, data)
-                print(data.fetchall())
-                con.commit()
-                cursor.close()
+                update = f"UPDATE EMPLOYERS SET name='{kort[0]}',year='{kort[1]}',phone_num={kort[2]},position={kort[3]} WHERE id={ids}"
+                # ("EMPLOYERS"(TEXT),4(int),('Витя'(TEXT),'1982'(TEXT),337474374(BIGINT),3(int))
+
+                con.execute(update)
                 return True
             except Exception as erradd:
                 return erradd
@@ -134,6 +131,7 @@ def change_table(name, ids, kort): # получает name = 'TEXT' ids = intege
                 return True
             except Exception as erradd:
                 return erradd
+
 
 def comeback_table():
     with con:
