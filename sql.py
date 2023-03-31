@@ -7,7 +7,7 @@ with con:
             id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
             name TEXT NOT NULL,
             year TEXT NOT NULL,
-            phone_num BIGINT NOT NULL,
+            phone_num INTEGER NOT NULL,
             position INTEGER NOT NULL,
             UNIQUE(phone_num))""")
     con.execute("""CREATE TABLE IF NOT EXISTS POSITION(
