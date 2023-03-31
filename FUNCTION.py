@@ -191,9 +191,9 @@ def del_(table,ids): # запрос нужен в формате table = 'TEXT',
         except Exception as errdel:
             return errdel
         try:
-            if table == 'CLIENT_BASE':
+            if table == 'SERVICE':
                 cursor = con.cursor()
-                delete_id = "DELETE FROM CLIENT_BASE WHERE id = ?"
+                delete_id = "DELETE FROM SERVICE WHERE id = ?"
                 cursor.execute(delete_id, (ids,))
                 con.commit()
                 cursor.close()
