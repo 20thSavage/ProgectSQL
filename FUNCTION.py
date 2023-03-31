@@ -93,7 +93,6 @@ def change_table(name, ids, kort): # получает name = 'TEXT' ids = intege
             try:
                 update = f"UPDATE EMPLOYERS SET name='{kort[0]}',year='{kort[1]}',phone_num={kort[2]},position={kort[3]} WHERE id={ids}"
                 # ("EMPLOYERS"(TEXT),4(int),('Витя'(TEXT),'1982'(TEXT),337474374(BIGINT),3(int))
-
                 con.execute(update)
                 return True
             except Exception as erradd:
@@ -101,33 +100,27 @@ def change_table(name, ids, kort): # получает name = 'TEXT' ids = intege
         if name == 'CLIENT_BASE':
             try:
                 cursor = con.cursor()
-                update = "UPDATE CLIENT_BASE SET name=?,age=?,phone_num=? WHERE id=?"# ("CLIENT_BASE"(TEXT),4(int),('Витя'(TEXT),24(int),34353553(BIGINT))
-                data = list(kort).append(ids)
-                cursor.execute(update, data)
-                con.commit()
-                cursor.close()
+                update = f"UPDATE CLIENT_BASE SET name='{kort[0]}',age={kort[1]},phone_num={kort[2]} WHERE id={ids}"
+                # ("CLIENT_BASE"(TEXT),4(int),('Витя'(TEXT),24(int),34353553(BIGINT))
+                con.execute(update)
                 return True
             except Exception as erradd:
                 return erradd
         if name == 'ORDERS':
             try:
                 cursor = con.cursor()
-                update = "UPDATE ORDERS SET client=?,service=?,employer=? WHERE id=?"#("ORDERS"(TEXT),4(int),(4(INT),3(INT),2(INT))
-                data = list(kort).append(ids)
-                cursor.execute(update, data)
-                con.commit()
-                cursor.close()
+                update = f"UPDATE ORDERS SET client={kort[0]},service={kort[1]},employer={kort[2]} WHERE id={ids}"
+                #("ORDERS"(TEXT),4(int),(4(INT),3(INT),2(INT))
+                con.execute(update)
                 return True
             except Exception as erradd:
                 return erradd
         if name == 'SERVICE':
             try:
                 cursor = con.cursor()
-                update = "UPDATE SERVICE SET name=?,price=?,time=? WHERE id=?"#("SERVICE"(TEXT),4(int),('УЗИ'(TEXT),103(BIGINT),'11-30'(TEXT)))
-                data = list(kort).append(ids)
-                cursor.execute(update, data)
-                con.commit()
-                cursor.close()
+                update = f"UPDATE SERVICE SET name='{kort[0]}',price={kort[1]},time='{kort[2]}' WHERE id={ids}"
+                #("SERVICE"(TEXT),4(int),('УЗИ'(TEXT),103(BIGINT),'11-30'(TEXT)))
+                cursor.execute(update)
                 return True
             except Exception as erradd:
                 return erradd
