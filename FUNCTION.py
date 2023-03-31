@@ -87,14 +87,15 @@ def return_table(data):
                 return orderserr
 
 
-def change_table(name, ids, kort):
+def change_table(name, ids, kort): # получает name = 'TEXT' ids = integer kort = ()
     with con:
         if name == 'EMPLOYERS':
             try:
                 cursor = con.cursor()
-                update = "UPDATE EMPLOYERS SET name=?,year=?,phone_num=?,position=? WHERE id=?"
+                update = "UPDATE EMPLOYERS SET name=?,year=?,phone_num=?,position=? WHERE id=?" # ("EMPLOYERS"(TEXT),4(int),('Витя'(TEXT),'1982'(TEXT),337474374(BIGINT),3(int))
                 data = list(kort).append(ids)
                 cursor.execute(update, data)
+                print(data.fetchall())
                 con.commit()
                 cursor.close()
                 return True
@@ -103,7 +104,7 @@ def change_table(name, ids, kort):
         if name == 'CLIENT_BASE':
             try:
                 cursor = con.cursor()
-                update = "UPDATE CLIENT_BASE SET name=?,age=?,phone_num=? WHERE id=?"
+                update = "UPDATE CLIENT_BASE SET name=?,age=?,phone_num=? WHERE id=?"# ("CLIENT_BASE"(TEXT),4(int),('Витя'(TEXT),24(int),34353553(BIGINT))
                 data = list(kort).append(ids)
                 cursor.execute(update, data)
                 con.commit()
@@ -114,7 +115,7 @@ def change_table(name, ids, kort):
         if name == 'ORDERS':
             try:
                 cursor = con.cursor()
-                update = "UPDATE ORDERS SET client=?,service=?,employer=? WHERE id=?"
+                update = "UPDATE ORDERS SET client=?,service=?,employer=? WHERE id=?"#("ORDERS"(TEXT),4(int),(4(INT),3(INT),2(INT))
                 data = list(kort).append(ids)
                 cursor.execute(update, data)
                 con.commit()
@@ -125,7 +126,7 @@ def change_table(name, ids, kort):
         if name == 'SERVICE':
             try:
                 cursor = con.cursor()
-                update = "UPDATE SERVICE SET name=?,price=?,time=? WHERE id=?"
+                update = "UPDATE SERVICE SET name=?,price=?,time=? WHERE id=?"#("SERVICE"(TEXT),4(int),('УЗИ'(TEXT),103(BIGINT),'11-30'(TEXT)))
                 data = list(kort).append(ids)
                 cursor.execute(update, data)
                 con.commit()
@@ -133,7 +134,6 @@ def change_table(name, ids, kort):
                 return True
             except Exception as erradd:
                 return erradd
-
 
 def comeback_table():
     with con:
@@ -167,6 +167,56 @@ def add_z (id):
             return True
         except Exception as err:
             return err
+
+def del_(table,ids): # запрос нужен в формате table = 'TEXT', ids = int и всё
+    with con:
+        try:
+            if table == 'CLIENT_BASE':
+                cursor = con.cursor()
+                delete_id = "DELETE FROM CLIENT_BASE WHERE id = ?"
+                a=cursor.execute(delete_id,(ids, ))
+                con.commit()
+                cursor.close()
+                return True
+        except Exception as errdel:
+            return errdel
+        try:
+            if table == 'EMPLOYERS':
+                cursor = con.cursor()
+                delete_id = "DELETE FROM EMPLOYERS WHERE id = ?"
+                cursor.execute(delete_id,(ids, ))
+                con.commit()
+                cursor.close()
+                return True
+        except Exception as errdel:
+            return errdel
+        try:
+            if table == 'CLIENT_BASE':
+                cursor = con.cursor()
+                delete_id = "DELETE FROM CLIENT_BASE WHERE id = ?"
+                cursor.execute(delete_id, (ids,))
+                con.commit()
+                cursor.close()
+                return True
+        except Exception as errdel:
+            return errdel
+        try:
+            if table == 'ORDERS':
+                cursor = con.cursor()
+                delete_id = "DELETE FROM ORDERS WHERE id = ?"
+                cursor.execute(delete_id, (ids,))
+                con.commit()
+                cursor.close()
+                return True
+        except Exception as errdel:
+            return errdel
+
+
+
+
+
+
+
 
 
 
