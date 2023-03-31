@@ -223,3 +223,5 @@ def del_(table,ids): # запрос нужен в формате table = 'TEXT',
 
 
 
+
+
